@@ -5,10 +5,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
 
 namespace Dz
 {
+    /*      
+        Создайте 2 интерфейса IPlayable и IRecodable. В каждом из интерфейсов создайте по 3 метода void
+        Play() / void Pause() / void Stop() и void Record() / void Pause() / void Stop() соответственно.
+        Создайте производный класс Player от базовых интерфейсов IPlayable и IRecodable.
+        Написать программу, которая выполняет проигрывание и запись 
+    */
+    public interface IPlayable
+    {
+        void Play();
+        void Pause();
+        void Stop();
+        void Rewind(double percent);
+        event EventHandler<PlayerEventArgs> OnTick;
+    }
+
+    public interface IRecordable
+    {
+        void Record();
+        void Pause();
+        void Stop();
+        event EventHandler<TimeSpan> OnTick;
+    }
+
     public class PlayerEventArgs : EventArgs
     {
         public double PercentProgress { get; private set; }
@@ -22,6 +46,7 @@ namespace Dz
             PlayedTime = playedTime;
         }
     }
+
     public class Player : MediaElement, IPlayable
     {
         DispatcherTimer _timer = new DispatcherTimer();
@@ -36,7 +61,6 @@ namespace Dz
             LoadedBehavior = MediaState.Manual;
             UnloadedBehavior = MediaState.Manual;
         }
-
 
         void IPlayable.Play()
         {
@@ -65,6 +89,7 @@ namespace Dz
         }
         void IPlayable.Rewind(double percent) => Position = new TimeSpan((long)(Duration.Ticks * percent / 100));
     }
+
     public class Recorder : IRecordable
     {
         DispatcherTimer recordTimer;
@@ -87,7 +112,7 @@ namespace Dz
             recorder.DataAvailable += (o, e) => recordedData.AddRange(e.Buffer);
         }
 
-        public void Record()
+        void IRecordable.Record()
         {
             recordTimer.Start();
             recorder.StartRecording();
@@ -118,6 +143,7 @@ namespace Dz
             }
         }
     }
+
     public partial class PlayerRecorderWindow : Window
     {
         IPlayable _player;
@@ -150,12 +176,11 @@ namespace Dz
         private void btPlayPause_Click(object sender, EventArgs e) => _player.Pause();
         private void btPlayStop_Click(object sender, EventArgs e) => _player.Stop();
 
-        private void pb_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e) => isDragging = true;
-        private void pb_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        private void pb_DragStarted(object sender, DragStartedEventArgs e) => isDragging = true;
+        private void pb_DragCompleted(object sender, DragCompletedEventArgs e)
         {
             isDragging = false;
             _player.Rewind(pb.Value / 100);
         }
-
     }
 }

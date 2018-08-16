@@ -7,34 +7,22 @@ using System.Xml;
 
 namespace Dz
 {
-    /*
-Создайте класс AbstractHandler.
+    /*      
+        Создайте класс AbstractHandler.
+        В теле класса создать методы void Open(), void Create(), void Chenge(), абстрактный void Save().
+        Создать производные классы XMLHandler, TXTHandler, DOCHandler от базового класса
+        AbstractHandler.
+        Написать программу, которая будет выполнять определение документа и для каждого формата должны быть методы открытия, создания, редактирования, сохранения определенного формата документа. 
+    */
 
-В теле класса создать методы void Open(), void Create(), void Chenge(), абстрактный void Save().
-
-Создать производные классы XMLHandler, TXTHandler, DOCHandler от базового класса
-
-AbstractHandler.
-
-Написать программу, которая будет выполнять определение документа и для каждого формата должны быть методы открытия, создания, редактирования, сохранения определенного формата документа.
- */
     public abstract partial class AbstractHandler : Form
     {
         public AbstractHandler() => InitializeComponent();
 
         protected string _type;
         string _path;
-        public string Path
-        {
-            get => _path;
-            set
-            {
-                _path = value;
-                Text = _path.Any() ? _path : $"Новый {_type} файл";
-            }
-        }
-
         private bool _edited = false;
+
         private bool Edited
         {
             get => _edited;
@@ -45,6 +33,15 @@ AbstractHandler.
                     Text += '*';
                 else
                     Text = Text.TrimEnd('*');
+            }
+        }
+        public string Path
+        {
+            get => _path;
+            set
+            {
+                _path = value;
+                Text = _path.Any() ? _path : $"Новый {_type} файл";
             }
         }
 
@@ -75,7 +72,7 @@ AbstractHandler.
         }
         public virtual void Save()
         {
-            if (Path == string.Empty)
+            if (string.IsNullOrEmpty(Path))
             {
                 SaveFileDialog sfd = new SaveFileDialog
                 {
@@ -90,10 +87,10 @@ AbstractHandler.
             File.WriteAllText(Path, tb.Text, Encoding.GetEncoding(1251));
             Edited = false;
         }
+
         private void createToolStripMenuItem_Click(object sender, EventArgs e) => Create();
         private void openToolStripMenuItem1_Click(object sender, EventArgs e) => Open();
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) => Save();
-
         private void AbstractHandler_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Edited && MessageBox.Show("Сохранить изменения?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -107,9 +104,9 @@ AbstractHandler.
                     e.Cancel = true;
                 }
         }
-
         private void tb_TextChanged(object sender, EventArgs e) => Edited = true;
     }
+
     public class XMLHandler : AbstractHandler
     {
         public XMLHandler() => _type = "xml";
@@ -128,10 +125,12 @@ AbstractHandler.
             }
         }
     }
+
     public class TXTHandler : AbstractHandler
     {
         public TXTHandler() => _type = "txt";
     }
+
     public class DOCHandler : AbstractHandler
     {
         public DOCHandler() => _type = "doc";
