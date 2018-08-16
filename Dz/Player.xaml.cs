@@ -154,7 +154,7 @@ namespace Dz
         public PlayerRecorderWindow(IPlayable player, IRecordable recorder)
         {
             _recorder = recorder;
-            _recorder.OnTick += (o, e) => lbRecord.Content = $"{e.ToString(@"mm\:ss")}";
+            _recorder.OnTick += (o, e) => lbRecord.Text = $"{e.ToString(@"mm\:ss")}";
 
             _player = player;
             _player.OnTick += (o, e) =>
@@ -162,7 +162,7 @@ namespace Dz
                 if (!isDragging)
                     pb.Value = (int)(e.PercentProgress * 100);
 
-                lbPlay.Content = $"{e.PlayedTime.Minutes:00}:{e.PlayedTime.Seconds:00}/{e.Duration.Minutes:00}:{e.Duration.Seconds:00}";
+                lbPlay.Text = $"{e.PlayedTime.Minutes:00}:{e.PlayedTime.Seconds:00}/{e.Duration.Minutes:00}:{e.Duration.Seconds:00}";
             };
 
             InitializeComponent();

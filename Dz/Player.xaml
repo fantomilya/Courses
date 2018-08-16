@@ -1,73 +1,82 @@
 ﻿<Window x:Class="Dz.PlayerRecorderWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        mc:Ignorable="d" 
-             Width="250"
-             MinWidth="250"
-             Height="135"
-             MinHeight="135"
-             ResizeMode="NoResize">
-    <Grid Height="105" Width="225">
+             MinWidth="374"
+             MinHeight="132"
+             Width="374"
+             Height="132"
+             ResizeMode="CanResize">
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="75"/>
-        </Grid.ColumnDefinitions>
-        <Slider Grid.Column="0" Maximum="10000" Minimum="0" Grid.ColumnSpan="5" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="pb" Thumb.DragCompleted="pb_DragCompleted" Thumb.DragStarted="pb_DragStarted"/>
-
-        <Button Grid.Column="0" Grid.Row="2" Content="Play" Name="btPlay" Click="btPlay_Click" Margin="1">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
+        <Grid Margin="5" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Slider Grid.Column="0"  Maximum="10000" Minimum="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="pb" Thumb.DragCompleted="pb_DragCompleted" Thumb.DragStarted="pb_DragStarted"/>
+            <Viewbox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3">
+                <TextBlock x:Name="lbPlay"><Run Text="00:00/00:00"/></TextBlock>
+            </Viewbox>
+            <Button Grid.Column="2" x:Name="btPlay" Click="btPlay_Click" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
                         <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\play-button.png"/>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Grid.Column="1" Grid.Row="2" Content="Pause" Name="btPlayPause" Click="btPlayPause_Click" Margin="1">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\pause-button-black.png"/>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Grid.Column="2" Grid.Row="2" Content="Stop" Name="btPlayStop" Click="btPlayStop_Click" Margin="1">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Grid.Column="3" Content="Pause" x:Name="btPlayPause" Click="btPlayPause_Click" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\pause-button-black.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Grid.Column="4" Content="Stop" x:Name="btPlayStop" Click="btPlayStop_Click" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
                         <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\stop-button-black.png"/>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Label Grid.Column="3" Grid.Row="2" Name="lbPlay" HorizontalAlignment="Center" VerticalAlignment="Center">00:00/00:00</Label>
-
-        <Button Grid.Column="0" Grid.Row="3" Content="Record" Name="btRecord" Click="btRecord_Click" Margin="1">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\record-button.png"/>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Grid.Column="1" Grid.Row="3" Content="Pause" Name="btRecordPause" Click="btRecordPause_Click" Margin="1">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\pause-button-red.png"/>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Grid.Column="2" Grid.Row="3" Content="Stop" Name="btRecordStop" Click="btRecordStop_Click" Margin="1">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\stop-button-red.png"/>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Label Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Name="lbRecord" >00:00</Label>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Name="btRecord" Click="btRecord_Click" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\record-button.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Grid.Column="1" Name="btRecordPause" Click="btRecordPause_Click" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\pause-button-red.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Grid.Column="2" Grid.Row="3" Name="btRecordStop" Click="btRecordStop_Click" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\stop-button-red.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Viewbox Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3">
+                <TextBlock x:Name="lbRecord" Text="00:00"></TextBlock>
+            </Viewbox>
+        </Grid>
     </Grid>
 </Window>
