@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace Dz
 {
-    /*      
+    /*  Задание 1
         Создайте класс AbstractHandler.
         В теле класса создать методы void Open(), void Create(), void Chenge(), абстрактный void Save().
         Создать производные классы XMLHandler, TXTHandler, DOCHandler от базового класса
