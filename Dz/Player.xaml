@@ -5,23 +5,24 @@
              MinHeight="132"
              Width="374"
              Height="132"
-             ResizeMode="CanResize">
+             ResizeMode="CanResizeWithGrip"
+             WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <Storyboard x:Key="expand">
+        <Storyboard x:Key="Expand">
             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
         To="1.5" Duration="0:0:0.1"/>
             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
         To="1.5" Duration="0:0:0.1" />
         </Storyboard>
 
-        <Storyboard x:Key="collapse">
+        <Storyboard x:Key="Collapse">
             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
         To="1" Duration="0:0:0.1" />
             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
         To="1" Duration="0:0:0.1" />
         </Storyboard>
 
-        <Storyboard x:Key="roll">
+        <Storyboard x:Key="Roll">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.Children[1].Angle" Duration="0:0:0.3">
                 <LinearDoubleKeyFrame KeyTime="0%" Value="0" />
                 <LinearDoubleKeyFrame KeyTime="100%" Value="360" />
@@ -41,25 +42,25 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Slider Grid.Column="0" Maximum="10000" Minimum="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="pb" Thumb.DragCompleted="pb_DragCompleted" Thumb.DragStarted="pb_DragStarted"/>
+            <Slider Grid.Column="0" Maximum="10000" Minimum="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" x:Name="Pb" Thumb.DragCompleted="pb_DragCompleted" Thumb.DragStarted="pb_DragStarted"/>
             <Viewbox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3">
-                <TextBlock x:Name="lbPlay"><Run Text="00:00/00:00"/></TextBlock>
+                <TextBlock x:Name="LbPlay"><Run Text="00:00/00:00"/></TextBlock>
             </Viewbox>
-            <Button Grid.Column="2" x:Name="btPlay" Click="btPlay_Click" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
+            <Button Grid.Column="2" x:Name="BtPlay" Click="btPlay_Click" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\play-button.png"/>
+                        <Image Source="C:\Users\User\source\repos\Courses\Dz\Resources\play-button.png"/>
                     </ControlTemplate>
                 </Button.Template>
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Image.MouseEnter">
-                        <BeginStoryboard Storyboard="{StaticResource expand}" />
+                        <BeginStoryboard Storyboard="{StaticResource Expand}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Image.MouseLeave">
-                        <BeginStoryboard Storyboard="{StaticResource collapse}" />
+                        <BeginStoryboard Storyboard="{StaticResource Collapse}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Button.Click">
-                        <BeginStoryboard Storyboard="{StaticResource roll}" />
+                        <BeginStoryboard Storyboard="{StaticResource Roll}" />
                     </EventTrigger>
                 </Button.Triggers>
                 <Button.RenderTransform>
@@ -69,21 +70,21 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button Grid.Column="3" Content="Pause" x:Name="btPlayPause" Click="btPlayPause_Click" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
+            <Button Grid.Column="3" Content="Pause" x:Name="BtPlayPause" Click="btPlayPause_Click" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\pause-button-black.png"/>
+                        <Image Source="C:\Users\User\source\repos\Courses\Dz\Resources\pause-button-black.png"/>
                     </ControlTemplate>
                 </Button.Template>
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Image.MouseEnter">
-                        <BeginStoryboard Storyboard="{StaticResource expand}" />
+                        <BeginStoryboard Storyboard="{StaticResource Expand}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Image.MouseLeave">
-                        <BeginStoryboard Storyboard="{StaticResource collapse}" />
+                        <BeginStoryboard Storyboard="{StaticResource Collapse}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Button.Click">
-                        <BeginStoryboard Storyboard="{StaticResource roll}" />
+                        <BeginStoryboard Storyboard="{StaticResource Roll}" />
                     </EventTrigger>
                 </Button.Triggers>
                 <Button.RenderTransform>
@@ -93,21 +94,21 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button Grid.Column="4" Content="Stop" x:Name="btPlayStop" Click="btPlayStop_Click" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
+            <Button Grid.Column="4" Content="Stop" x:Name="BtPlayStop" Click="btPlayStop_Click" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\stop-button-black.png"/>
+                        <Image Source="C:\Users\User\source\repos\Courses\Dz\Resources\stop-button-black.png"/>
                     </ControlTemplate>
                 </Button.Template>
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Image.MouseEnter">
-                        <BeginStoryboard Storyboard="{StaticResource expand}" />
+                        <BeginStoryboard Storyboard="{StaticResource Expand}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Image.MouseLeave">
-                        <BeginStoryboard Storyboard="{StaticResource collapse}" />
+                        <BeginStoryboard Storyboard="{StaticResource Collapse}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Button.Click">
-                        <BeginStoryboard Storyboard="{StaticResource roll}" />
+                        <BeginStoryboard Storyboard="{StaticResource Roll}" />
                     </EventTrigger>
                 </Button.Triggers>
                 <Button.RenderTransform>
@@ -126,21 +127,21 @@
                 <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="7*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Name="btRecord" Click="btRecord_Click" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
+            <Button Grid.Column="0" Name="BtRecord" Click="btRecord_Click" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\record-button.png"/>
+                        <Image Source="C:\Users\User\source\repos\Courses\Dz\Resources\record-button.png"/>
                     </ControlTemplate>
                 </Button.Template>
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Image.MouseEnter">
-                        <BeginStoryboard Storyboard="{StaticResource expand}" />
+                        <BeginStoryboard Storyboard="{StaticResource Expand}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Image.MouseLeave">
-                        <BeginStoryboard Storyboard="{StaticResource collapse}" />
+                        <BeginStoryboard Storyboard="{StaticResource Collapse}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Button.Click">
-                        <BeginStoryboard Storyboard="{StaticResource roll}" />
+                        <BeginStoryboard Storyboard="{StaticResource Roll}" />
                     </EventTrigger>
                 </Button.Triggers>
                 <Button.RenderTransform>
@@ -150,21 +151,21 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button Grid.Column="1" Name="btRecordPause" Click="btRecordPause_Click" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
+            <Button Grid.Column="1" Name="BtRecordPause" Click="btRecordPause_Click" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\pause-button-red.png"/>
+                        <Image Source="C:\Users\User\source\repos\Courses\Dz\Resources\pause-button-red.png"/>
                     </ControlTemplate>
                 </Button.Template>
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Image.MouseEnter">
-                        <BeginStoryboard Storyboard="{StaticResource expand}" />
+                        <BeginStoryboard Storyboard="{StaticResource Expand}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Image.MouseLeave">
-                        <BeginStoryboard Storyboard="{StaticResource collapse}" />
+                        <BeginStoryboard Storyboard="{StaticResource Collapse}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Button.Click">
-                        <BeginStoryboard Storyboard="{StaticResource roll}" />
+                        <BeginStoryboard Storyboard="{StaticResource Roll}" />
                     </EventTrigger>
                 </Button.Triggers>
                 <Button.RenderTransform>
@@ -174,21 +175,21 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button Grid.Column="2" Grid.Row="3" Name="btRecordStop" Click="btRecordStop_Click" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
+            <Button Grid.Column="2" Name="BtRecordStop" Click="btRecordStop_Click" Margin="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RenderTransformOrigin="0.5,0.5">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Source="C:\Users\fanto\documents\visual studio 2017\Projects\Dz\Dz\Resources\stop-button-red.png"/>
+                        <Image Source="C:\Users\User\source\repos\Courses\Dz\Resources\stop-button-red.png"/>
                     </ControlTemplate>
                 </Button.Template>
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Image.MouseEnter">
-                        <BeginStoryboard Storyboard="{StaticResource expand}" />
+                        <BeginStoryboard Storyboard="{StaticResource Expand}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Image.MouseLeave">
-                        <BeginStoryboard Storyboard="{StaticResource collapse}" />
+                        <BeginStoryboard Storyboard="{StaticResource Collapse}" />
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Button.Click">
-                        <BeginStoryboard Storyboard="{StaticResource roll}" />
+                        <BeginStoryboard Storyboard="{StaticResource Roll}" />
                     </EventTrigger>
                 </Button.Triggers>
                 <Button.RenderTransform>
@@ -199,7 +200,7 @@
                 </Button.RenderTransform>
             </Button>
             <Viewbox Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3">
-                <TextBlock x:Name="lbRecord" Text="00:00"></TextBlock>
+                <TextBlock x:Name="LbRecord" Text="00:00"></TextBlock>
             </Viewbox>
         </Grid>
     </Grid>

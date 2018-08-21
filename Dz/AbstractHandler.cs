@@ -17,11 +17,11 @@ namespace Dz
 
     public abstract partial class AbstractHandler : Form
     {
-        public AbstractHandler() => InitializeComponent();
+        protected AbstractHandler() => InitializeComponent();
 
-        protected string _type;
-        string _path;
-        private bool _edited = false;
+        protected string Type;
+        private string _path;
+        private bool _edited;
 
         private bool Edited
         {
@@ -41,29 +41,30 @@ namespace Dz
             set
             {
                 _path = value;
-                Text = _path.Any() ? _path : $"Новый {_type} файл";
+                Text = _path.Any() ? _path : $"Новый {Type} файл";
             }
         }
 
-        void Open()
+        private void Open()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 InitialDirectory = Directory.GetCurrentDirectory(),
-                Filter = $"{_type} (*.{_type})|*.{_type}"
+                Filter = $"{Type} (*.{Type})|*.{Type}"
             };
 
             if (openFileDialog.ShowDialog() == DialogResult.OK && openFileDialog.OpenFile() is Stream fs)
             {
                 Path = openFileDialog.FileName;
                 tb.Enabled = saveToolStripMenuItem.Enabled = true;
-                using (var reader = new StreamReader(fs, Encoding.GetEncoding(1251)))
+                using (StreamReader reader = new StreamReader(fs, Encoding.GetEncoding(1251)))
                     tb.Text = reader.ReadToEnd();
 
                 Edited = false;
             }
         }
-        void Create()
+
+        private void Create()
         {
             tb.Clear();
             Path = string.Empty;
@@ -76,7 +77,7 @@ namespace Dz
             {
                 SaveFileDialog sfd = new SaveFileDialog
                 {
-                    Filter = $"{_type} (*.{_type})|*.{_type}",
+                    Filter = $"{Type} (*.{Type})|*.{Type}",
                     AddExtension = true
                 };
                 if (sfd.ShowDialog() == DialogResult.OK)
@@ -107,9 +108,9 @@ namespace Dz
         private void tb_TextChanged(object sender, EventArgs e) => Edited = true;
     }
 
-    public class XMLHandler : AbstractHandler
+    public class XmlHandler : AbstractHandler
     {
-        public XMLHandler() => _type = "xml";
+        public XmlHandler() => Type = "xml";
 
         public override void Save()
         {
@@ -117,22 +118,22 @@ namespace Dz
             {
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(tb.Text);
-                base.Save();
             }
             catch (XmlException e)
             {
-                throw new Exception("Неверный xml", e);
+                MessageBox.Show(e.Message, "Неверный xml", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            base.Save();
         }
     }
 
-    public class TXTHandler : AbstractHandler
+    public class TxtHandler : AbstractHandler
     {
-        public TXTHandler() => _type = "txt";
+        public TxtHandler() => Type = "txt";
     }
 
-    public class DOCHandler : AbstractHandler
+    public class DocHandler : AbstractHandler
     {
-        public DOCHandler() => _type = "doc";
+        public DocHandler() => Type = "doc";
     }
 }
