@@ -35,9 +35,9 @@ namespace Dz
 
     public class PlayerEventArgs : EventArgs
     {
-        public double PercentProgress { get; private set; }
-        public TimeSpan Duration { get; private set; }
-        public TimeSpan PlayedTime { get; private set; }
+        public double PercentProgress { get;}
+        public TimeSpan Duration { get;}
+        public TimeSpan PlayedTime { get;}
 
         public PlayerEventArgs(double percentProgress, TimeSpan duration, TimeSpan playedTime)
         {
@@ -49,8 +49,8 @@ namespace Dz
 
     public class Player : MediaElement, IPlayable
     {
-        DispatcherTimer _timer = new DispatcherTimer();
-        double PercentProgress => (Position.TotalSeconds * 100 / Duration.TotalSeconds);
+        private readonly DispatcherTimer _timer = new DispatcherTimer();
+        private double PercentProgress => Position.TotalSeconds * 100 / Duration.TotalSeconds;
         public TimeSpan Duration => NaturalDuration.HasTimeSpan ? NaturalDuration.TimeSpan : new TimeSpan();
 
         public event EventHandler<PlayerEventArgs> OnTick;
@@ -92,77 +92,83 @@ namespace Dz
 
     public class Recorder : IRecordable
     {
-        DispatcherTimer recordTimer;
-        WaveInEvent recorder;
-        TimeSpan recordTime;
-        List<byte> recordedData;
+        private readonly DispatcherTimer _recordTimer;
+        private readonly WaveInEvent _recorder;
+        private TimeSpan _recordTime;
+        private readonly List<byte> _recordedData;
 
         public event EventHandler<TimeSpan> OnTick;
 
         public Recorder()
         {
-            recorder = new WaveInEvent();
-            recordedData = new List<byte>();
-            recordTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 500) };
-            recordTimer.Tick += (o, e) =>
+            _recorder = new WaveInEvent{DeviceNumber = 0};
+
+            //for (int i = 0; i < WaveIn.DeviceCount; i++)
+            //{
+            //    WaveInCapabilities deviceInfo = WaveInEvent.GetCapabilities(i);
+            //    Console.WriteLine($"Device {i}: {deviceInfo.ProductName}, {deviceInfo.Channels} channels");
+            //}
+            _recordedData = new List<byte>();
+            _recordTimer = new DispatcherTimer{ Interval = new TimeSpan(0, 0, 0, 0, 500) };
+            _recordTimer.Tick += (o, e) =>
             {
-                OnTick?.Invoke(this, recordTime);
-                recordTime += recordTimer.Interval;
+                OnTick?.Invoke(this, _recordTime);
+                _recordTime += _recordTimer.Interval;
             };
-            recorder.DataAvailable += (o, e) => recordedData.AddRange(e.Buffer);
+            _recorder.DataAvailable += (o, e) => _recordedData.AddRange(e.Buffer);
         }
 
         void IRecordable.Record()
         {
-            recordTimer.Start();
-            recorder.StartRecording();
+            _recordTimer.Start();
+            _recorder.StartRecording();
         }
         void IRecordable.Pause()
         {
-            recordTimer.Stop();
-            recorder.StopRecording();
+            _recordTimer.Stop();
+            _recorder.StopRecording();
         }
         void IRecordable.Stop()
         {
-            recorder.StopRecording();
+            _recorder.StopRecording();
 
-            if (recordedData.Any())
+            if (_recordedData.Any())
             {
                 string path = System.IO.Path.GetTempFileName().Replace(".tmp", ".mp3");
-                using (var writer = new WaveFileWriter(path, recorder.WaveFormat))
+                using (WaveFileWriter writer = new WaveFileWriter(path, _recorder.WaveFormat))
                 {
-                    writer.Write(recordedData.ToArray(), 0, recordedData.Count);
+                    writer.Write(_recordedData.ToArray(), 0, _recordedData.Count);
                     writer.Flush();
                 }
 
+                _recordedData.Clear();
+                _recordTimer.Stop();
+                _recordTime = new TimeSpan();
+                OnTick?.Invoke(this, _recordTime);
                 MessageBox.Show($"Файл сохранен по пути {path}");
-                recordedData.Clear();
-                recordTimer.Stop();
-                recordTime = new TimeSpan();
-                OnTick?.Invoke(this, recordTime);
             }
         }
     }
 
-    public partial class PlayerRecorderWindow : Window
+    public partial class PlayerRecorderWindow
     {
-        IPlayable _player;
-        IRecordable _recorder;
-        bool isDragging = false;
+        private readonly IPlayable _player;
+        private readonly IRecordable _recorder;
+        private bool _isDragging;
 
         public PlayerRecorderWindow() : this(new Player(), new Recorder()) { }
         public PlayerRecorderWindow(IPlayable player, IRecordable recorder)
         {
             _recorder = recorder;
-            _recorder.OnTick += (o, e) => lbRecord.Text = $"{e.ToString(@"mm\:ss")}";
+            _recorder.OnTick += (o, e) => LbRecord.Text = $"{e:mm\\:ss}";
 
             _player = player;
             _player.OnTick += (o, e) =>
             {
-                if (!isDragging)
-                    pb.Value = (int)(e.PercentProgress * 100);
+                if (!_isDragging)
+                    Pb.Value = (int)(e.PercentProgress * 100);
 
-                lbPlay.Text = $"{e.PlayedTime.Minutes:00}:{e.PlayedTime.Seconds:00}/{e.Duration.Minutes:00}:{e.Duration.Seconds:00}";
+                LbPlay.Text = $"{e.PlayedTime.Minutes:00}:{e.PlayedTime.Seconds:00}/{e.Duration.Minutes:00}:{e.Duration.Seconds:00}";
             };
 
             InitializeComponent();
@@ -176,11 +182,11 @@ namespace Dz
         private void btPlayPause_Click(object sender, EventArgs e) => _player.Pause();
         private void btPlayStop_Click(object sender, EventArgs e) => _player.Stop();
 
-        private void pb_DragStarted(object sender, DragStartedEventArgs e) => isDragging = true;
+        private void pb_DragStarted(object sender, DragStartedEventArgs e) => _isDragging = true;
         private void pb_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            isDragging = false;
-            _player.Rewind(pb.Value / 100);
+            _isDragging = false;
+            _player.Rewind(Pb.Value / 100);
         }
     }
 }

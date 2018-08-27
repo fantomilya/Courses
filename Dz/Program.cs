@@ -2,13 +2,13 @@
 
 namespace Dz
 {
-    class Program
+    internal class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        private static void Main()
         {
-            new PlayerRecorderWindow().ShowDialog();
-            new XMLHandler().ShowDialog();
+            //new PlayerRecorderWindow().ShowDialog();
+            new XmlHandler().ShowDialog();
         }
     }
 }
