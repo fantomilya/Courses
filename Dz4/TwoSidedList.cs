@@ -50,9 +50,9 @@ namespace Dz4
         public void CopyTo(T[] array, int arrayIndex)
         {
             int i = 0;
-            foreach(var v in this)
+            foreach (var v in this)
             {
-                array[arrayIndex + i] = v;
+                array[arrayIndex + i] = v is ICloneable cl ? (T)cl.Clone() : v;
                 i++;
             }
         }
