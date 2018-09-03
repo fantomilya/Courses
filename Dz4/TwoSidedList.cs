@@ -7,14 +7,11 @@ namespace Dz4
 {
     class TwoSidedList<T> : ICollection<T> where T : IComparable<T>
     {
-        Node<T> _first;
-        Node<T> _last;
+        Node<T> First { get; set; }
+        Node<T> Last { get; set; }
 
-        public TwoSidedList()
-        {
-
-        }
-        public TwoSidedList(T n) => _first = _last = new Node<T>(n);
+        public TwoSidedList() { }
+        public TwoSidedList(T n) => First = Last = new Node<T>(n);
 
         public T this[int index]
         {
@@ -25,7 +22,7 @@ namespace Dz4
                 {
                     bool fromStart = index < Count / 2;
                     index = fromStart ? index : currentCount - index - 1;
-                    Node<T> searchingNode = fromStart ? _first : _last;
+                    Node<T> searchingNode = fromStart ? First : Last;
                     for (int i = 0; i < index && searchingNode != null; i++, searchingNode = fromStart ? searchingNode.Next : searchingNode.Prev) ;
                     return searchingNode == null ? default(T) : searchingNode.Value;
                 }
@@ -39,16 +36,16 @@ namespace Dz4
         public void Add(T item)
         {
             var newNode = new Node<T>(item);
-            if (_first != null)
+            if (First != null)
             {
-                newNode.Prev = _last;
-                _last.Next = newNode;
-                _last = newNode;
+                newNode.Prev = Last;
+                Last.Next = newNode;
+                Last = newNode;
             }
             else
-                _first = _last = newNode;
+                First = Last = newNode;
         }
-        public void Clear() => _first = _last = null;
+        public void Clear() => First = Last = null;
         public bool Contains(T item) => this[item] != null;
         public void CopyTo(T[] array, int arrayIndex)
         {
@@ -61,7 +58,7 @@ namespace Dz4
         }
         public IEnumerator<T> GetEnumerator()
         {
-            Node<T> currentNode = _first;
+            Node<T> currentNode = First;
             while (currentNode != null)
             {
                 yield return currentNode.Value;
@@ -75,12 +72,12 @@ namespace Dz4
                 if (currentNode?.Prev is Node<T> preNode)
                     preNode.Next = currentNode.Next;
                 else
-                    _first = currentNode.Next;
+                    First = currentNode.Next;
 
                 if (currentNode.Next is Node<T> postNode)
                     postNode.Prev = currentNode.Prev;
                 else
-                    _last = currentNode.Prev;
+                    Last = currentNode.Prev;
 
                 return true;
             }
@@ -88,7 +85,7 @@ namespace Dz4
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
-            Node<T> currentNode = _first;
+            Node<T> currentNode = First;
             while (currentNode != null)
             {
                 yield return currentNode;
@@ -106,8 +103,8 @@ namespace Dz4
                 node.Next = insertingNode;
                 insertingNode.Prev = node;
 
-                if (node == _last)
-                    _last = insertingNode;
+                if (node == Last)
+                    Last = insertingNode;
 
                 return true;
             }

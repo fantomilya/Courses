@@ -2,14 +2,15 @@
 {
     struct Month
     {
+        public int DaysCount { get; }
+        public MonthName Name { get; }
+
         public Month(MonthName name, int daysCount)
         {
-            this.daysCount = daysCount;
-            this.name = name;
+            this.DaysCount = daysCount;
+            this.Name = name;
         }
 
-        public int daysCount { get; }
-        public MonthName name { get; }
-        public override string ToString() => $"{name.ToString()}({daysCount.ToString()})";
+        public override string ToString() => $"{Name.ToString()}({DaysCount.ToString()})";
     }
 }

@@ -10,6 +10,7 @@
             Purchaser = purchaser;
             Category = category;
         }
+
         public override string ToString() => $"{Purchaser} - {Category}";
     }
 }
