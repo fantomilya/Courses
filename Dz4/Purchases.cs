@@ -17,6 +17,7 @@ namespace Dz4
             purchases = new Purchase[5];
             _count = 0;
         }
+
         public IEnumerable<string> GetPurchasersByCategory(string category) => purchases.Where(p => p.Category == category).Select(p => p.Purchaser);
         public IEnumerable<string> GetCategoresByPurchaser(string purchaser) => purchases.Where(p => p.Purchaser == purchaser).Select(p => p.Category);
 

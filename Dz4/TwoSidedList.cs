@@ -26,83 +26,61 @@ namespace Dz4
                     bool fromStart = index < Count / 2;
                     index = fromStart ? index : currentCount - index - 1;
                     Node<T> searchingNode = fromStart ? _first : _last;
-                    for (int i = 0; i < index && searchingNode != null; i++, searchingNode = fromStart ? searchingNode.next : searchingNode.prev) ;
-                    return searchingNode == null ? default(T) : searchingNode.value;
+                    for (int i = 0; i < index && searchingNode != null; i++, searchingNode = fromStart ? searchingNode.Next : searchingNode.Prev) ;
+                    return searchingNode == null ? default(T) : searchingNode.Value;
                 }
                 return default(T);
             }
         }
-        Node<T> this[T target]
-        {
-            get
-            {
-                Node<T> node = null;
-                foreach (Node<T> v in this as IEnumerable)
-                    if (v.value.CompareTo(target) == 0)
-                        node = v;
+        Node<T> this[T target] => (this as IEnumerable).Cast<Node<T>>().FirstOrDefault(p => p.Value.CompareTo(target) == 0);
 
-                return node;
-            }
-        }
-
-        public int Count
-        {
-            get
-            {
-                int count = 0;
-                foreach (var v in this)
-                    count++;
-
-                return count;
-            }
-        }
+        public int Count => (this as IEnumerable).Cast<Node<T>>().Count();
         public bool IsReadOnly => false;
         public void Add(T item)
         {
             var newNode = new Node<T>(item);
             if (_first != null)
             {
-                newNode.prev = _last;
-                _last.next = newNode;
+                newNode.Prev = _last;
+                _last.Next = newNode;
                 _last = newNode;
             }
             else
                 _first = _last = newNode;
         }
-        public void Clear()
-        {
-            _first = _last = null;
-        }
+        public void Clear() => _first = _last = null;
         public bool Contains(T item) => this[item] != null;
         public void CopyTo(T[] array, int arrayIndex)
         {
-            int count = Count;
-            for (int i = 0; i < count; i++)
-                array[arrayIndex + i] = this[i];
+            int i = 0;
+            foreach(var v in this)
+            {
+                array[arrayIndex + i] = v;
+                i++;
+            }
         }
         public IEnumerator<T> GetEnumerator()
         {
             Node<T> currentNode = _first;
             while (currentNode != null)
             {
-                yield return currentNode.value;
-                currentNode = currentNode.next;
+                yield return currentNode.Value;
+                currentNode = currentNode.Next;
             }
         }
         public bool Remove(T item)
         {
             if (this[item] is Node<T> currentNode)
             {
-
-                if (currentNode?.prev is Node<T> preNode)
-                    preNode.next = currentNode.next;
+                if (currentNode?.Prev is Node<T> preNode)
+                    preNode.Next = currentNode.Next;
                 else
-                    _first = currentNode.next;
+                    _first = currentNode.Next;
 
-                if (currentNode.next is Node<T> postNode)
-                    postNode.prev = currentNode.prev;
+                if (currentNode.Next is Node<T> postNode)
+                    postNode.Prev = currentNode.Prev;
                 else
-                    _last = currentNode.prev;
+                    _last = currentNode.Prev;
 
                 return true;
             }
@@ -114,7 +92,7 @@ namespace Dz4
             while (currentNode != null)
             {
                 yield return currentNode;
-                currentNode = currentNode.next;
+                currentNode = currentNode.Next;
             }
         }
         public void AddLast(T item) => Add(item);
@@ -123,10 +101,10 @@ namespace Dz4
             if (this[target] is Node<T> node)
             {
                 var insertingNode = new Node<T>(item);
-                node.next.prev = insertingNode;
-                insertingNode.next = node.next;
-                node.next = insertingNode;
-                insertingNode.prev = node;
+                node.Next.Prev = insertingNode;
+                insertingNode.Next = node.Next;
+                node.Next = insertingNode;
+                insertingNode.Prev = node;
 
                 if (node == _last)
                     _last = insertingNode;
@@ -136,6 +114,6 @@ namespace Dz4
             else
                 return false;
         }
-        public override string ToString() => (this as IEnumerable).Cast<Node<T>>().Select((p, i) => i.ToString() + ". " + p.ToString() + "\n").DefaultIfEmpty(" ").Aggregate(string.Concat);
+        public override string ToString() => this.GetString(", ", "\"", "\"");
     }
 }

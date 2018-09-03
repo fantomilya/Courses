@@ -64,7 +64,7 @@ namespace Dz2
                 else
                     Console.WriteLine("Не удалось преобразовать стаж в число.");
             }
-            public override string ToString() => Count > 0 ?this.Select(p=>p.ToString()+'\n').Aggregate(string.Concat): "";
+            public override string ToString() => Count > 0 ?this.Select(p=>p.ToString()+"\n").Aggregate(string.Concat): "";
         }
         struct Worker : IComparable<Worker>
         {

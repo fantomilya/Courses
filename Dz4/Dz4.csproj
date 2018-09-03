@@ -42,11 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auto.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Month.cs" />
     <Compile Include="Monthes.cs" />
     <Compile Include="MonthName.cs" />
     <Compile Include="Node.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchase.cs" />
