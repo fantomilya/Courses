@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace Dz4
 {
-    class TwoSidedList<T> : ICollection<T> where T : IComparable<T>
+    class MyLinkedList<T> : ICollection<T> where T : IComparable<T>
     {
         Node<T> First { get; set; }
         Node<T> Last { get; set; }
 
-        public TwoSidedList() { }
-        public TwoSidedList(T n) => First = Last = new Node<T>(n);
+        public MyLinkedList() { }
+        public MyLinkedList(T n) => First = Last = new Node<T>(n);
 
         public T this[int index]
         {

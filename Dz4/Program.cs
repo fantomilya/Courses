@@ -42,7 +42,7 @@ namespace Dz4
         }
         public static void Task4()
         {
-            TwoSidedList<string> l = new TwoSidedList<string>();
+            MyLinkedList<string> l = new MyLinkedList<string>();
             Console.WriteLine("Создали список");
 
             l.Add("new");

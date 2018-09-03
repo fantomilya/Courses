@@ -7,37 +7,37 @@ namespace Dz4
 {
     class Purchases : ICollection<Purchase>
     {
-        Purchase[] PurchasesArray { get; set; }
+        Purchase[] _purchasesArray;
         int _count { get; set; }
         public int Count => _count;
         public bool IsReadOnly => false;
 
         public Purchases()
         {
-            PurchasesArray = new Purchase[5];
+            _purchasesArray = new Purchase[5];
             _count = 0;
         }
 
-        public IEnumerable<string> GetPurchasersByCategory(string category) => PurchasesArray.Where(p => p.Category == category).Select(p => p.Purchaser);
-        public IEnumerable<string> GetCategoresByPurchaser(string purchaser) => PurchasesArray.Where(p => p.Purchaser == purchaser).Select(p => p.Category);
+        public IEnumerable<string> GetPurchasersByCategory(string category) => _purchasesArray.Where(p => p.Category == category).Select(p => p.Purchaser);
+        public IEnumerable<string> GetCategoresByPurchaser(string purchaser) => _purchasesArray.Where(p => p.Purchaser == purchaser).Select(p => p.Category);
 
         public void Add(string purchaser, string category) => (this as ICollection<Purchase>).Add(new Purchase(purchaser, category));
         void ICollection<Purchase>.Add(Purchase item)
         {
             TryResize();
-            PurchasesArray[_count] = item;
+            _purchasesArray[_count] = item;
             _count++;
         }
         public void Clear() => _count = 0;
-        bool ICollection<Purchase>.Contains(Purchase item) => PurchasesArray.Contains(item);
+        bool ICollection<Purchase>.Contains(Purchase item) => _purchasesArray.Contains(item);
         public bool Contains(string purchaser, string category) => (this as ICollection<Purchase>).Contains(new Purchase(purchaser, category));
-        public void CopyTo(Purchase[] array, int arrayIndex) => PurchasesArray.CopyTo(array, arrayIndex);
+        public void CopyTo(Purchase[] array, int arrayIndex) => _purchasesArray.CopyTo(array, arrayIndex);
         bool ICollection<Purchase>.Remove(Purchase item)
         {
-            if (Array.IndexOf(PurchasesArray, item) is var pos && pos != -1)
+            if (Array.IndexOf(_purchasesArray, item) is var pos && pos != -1)
             {
                 for (int i = pos + 1; i < _count; i++)
-                    PurchasesArray[i - 1] = PurchasesArray[i];
+                    _purchasesArray[i - 1] = _purchasesArray[i];
 
                 _count--;
                 return true;
@@ -50,15 +50,11 @@ namespace Dz4
             foreach (Purchase v in this as IEnumerable)
                 yield return v;
         }
-        IEnumerator IEnumerable.GetEnumerator() => PurchasesArray.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => _purchasesArray.GetEnumerator();
         void TryResize()
         {
-            if (_count == PurchasesArray.Length)
-            {
-                var tmp = new Purchase[PurchasesArray.Length * 2];
-                PurchasesArray.CopyTo(tmp, 0);
-                PurchasesArray = tmp;
-            }
+            if (_count == _purchasesArray.Length)
+                Array.Resize(ref _purchasesArray, _purchasesArray.Length * 2);
         }
     }
 }
