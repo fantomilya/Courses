@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -54,29 +55,30 @@ namespace Dz4
             linkedList.AddAfter("new", "AddAfter");
             Console.WriteLine("AddAfter(\"new\", \"AddAfter\");\n" + linkedList.GetString(", ", "\"", "\"") + "\n");
 
-            linkedList.AddLast("AddLast");
-            Console.WriteLine("AddLast(\"AddLast\");\n" + linkedList.GetString(", ", "\"", "\"") + "\n");
+            linkedList.Insert(0, "Insert");
+            Console.WriteLine("Insert(0, \"Insert\");\n" + linkedList.GetString(", ", "\"", "\"") + "\n");
 
             string[] s = new string[10];
-            linkedList.CopyTo(s, 3);
-            Console.WriteLine("Копируем в новый массив размером 10, начиная с 3 \n" + s.GetString(", ", "\"", "\"") + "\n");
+            linkedList.CopyTo(s, 4);
+            Console.WriteLine("Копируем в новый массив размером 10, начиная с 9 \n" + s.GetString(", ", "\"", "\"") + "\n");
 
             linkedList.Remove("Add");
             Console.WriteLine("Remove(\"Add\");\n" + linkedList.GetString(", ", "\"", "\"") + "\n");
 
-            linkedList.Remove("AddLast");
-            Console.WriteLine("Remove(\"AddLast\");\n" + linkedList.GetString(", ", "\"", "\"") + $"\n{s}\n");
+            linkedList.RemoveAt(1);
+            Console.WriteLine("RemoveAt(1);\n" + linkedList.GetString(", ", "\"", "\"") + $"\n{consoleRowsDelimeterString}\n");
         }
         public static void Task5()
         {
-            var dic = new List<Auto>
+            var dic = new ArrayList()
             {
                 new Auto("Toyota Corolla", 180, 300000, 5, 1),
                 new Auto("VAZ 2114i", 160, 220000, 0, 2),
                 new Auto("Daewoo Nexia", 140, 260000, 5, 3),
                 new Auto("Honda Torneo", 220, 400000, 7, 4),
                 new Auto("Audi R8 Best", 360, 4200000, 3, 5)
-            }.ToArray();
+            }.Cast<Auto>().ToArray();
+
             Console.WriteLine("Задание 5\nИсходный каталог автомобилей: \n" + dic.GetString("\n") + "\n");
             Array.Sort(dic);
             Console.WriteLine("Отсортированный каталог автомобилей: \n" + dic.GetString("\n") + $"\n{consoleRowsDelimeterString}\n");
