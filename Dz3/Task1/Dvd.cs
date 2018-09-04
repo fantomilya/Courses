@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Dz3
 {
@@ -8,7 +9,7 @@ namespace Dz3
         Type type;
         List<File> files = new List<File>();
 
-        public Dvd(Type type, double speed)
+        public Dvd(Type type, double speed, string name, string model):base(name, model)
         {
             this.type = type;
             this.speed = speed;
@@ -38,6 +39,6 @@ namespace Dz3
 
         public override double GetFreeMemory() => (type == Type.OneSided ? 4.7 : 9) - files.Sum(p => p.size);
 
-        public override string GetInfo() => $"DVD скорость {speed} КБ/c, тип {type}, свободное место {GetFreeMemory()} ГБ";
+        public override string GetInfo() => $"DVD {base.ToString()} скорость {speed.ToString()} КБ/c, тип {type.ToString()}, свободное место {GetFreeMemory().ToString()} ГБ";
     }
 }

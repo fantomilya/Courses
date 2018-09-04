@@ -8,7 +8,7 @@ namespace Dz3
         const double speed = 61440;
         List<Section> sections;
 
-        public Hdd(int sectionsCount, double sectionCapacity) =>
+        public Hdd(int sectionsCount, double sectionCapacity, string name, string model):base(name, model) =>
             sections = new List<Section>(Enumerable.Range(1, sectionsCount).Select(p => new Section(sectionCapacity)));
 
         public override double Copy(params File[] files)
@@ -32,7 +32,7 @@ namespace Dz3
 
         public override double GetFreeMemory() => sections.Max(p => p.Capacity - p.files.Sum(f => f.size));
 
-        public override string GetInfo() => $"HDD скорость {speed} КБ/c, кол-во секций {sections.Count}, размер секции {sections.FirstOrDefault().Capacity} ГБ";
+        public override string GetInfo() => $"HDD {base.ToString()} скорость {speed.ToString()} КБ/c, кол-во секций {sections.Count.ToString()}, размер секции {sections.FirstOrDefault().Capacity.ToString()} ГБ";
 
         public override void Clear()
         {

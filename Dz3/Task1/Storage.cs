@@ -28,5 +28,11 @@ namespace Dz3
         public abstract string GetInfo();
         public abstract double CalcTime(double size);
         public abstract void Clear();
+        public Storage(string name, string model)
+        {
+            Name = name;
+            Model = model;
+        }
+        public override string ToString() => $"{Name} {Model}";
     }
 }

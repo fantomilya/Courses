@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Linq;
 namespace Dz3
 {
     class Flash : Storage
@@ -7,7 +7,7 @@ namespace Dz3
         const double speed = 655360;
         double capacity;
         List<File> files = new List<File>();
-        public Flash(double capacity) => this.capacity = capacity;
+        public Flash(double capacity, string name, string model):base(name, model) => this.capacity = capacity;
 
         public override double CalcTime(double size) => size * 1024 * 1024 / speed;
 
@@ -33,6 +33,6 @@ namespace Dz3
 
         public override double GetFreeMemory() => capacity - files.Sum(p => p.size);
 
-        public override string GetInfo() => $"Flash скорость {speed} КБ/c, объем {capacity} ГБ, свободное место {GetFreeMemory()} ГБ";
+        public override string GetInfo() => $"Flash {base.ToString()} скорость {speed.ToString()} КБ/c, объем {capacity.ToString()} ГБ, свободное место {GetFreeMemory().ToString()} ГБ";
     }
 }

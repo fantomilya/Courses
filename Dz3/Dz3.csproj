@@ -42,15 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPart.cs" />
-    <Compile Include="IWorker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Storage.cs" />
-    <Compile Include="Team.cs" />
-    <Compile Include="TeamLeader.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="Worker.cs" />
+    <Compile Include="Task1\Dvd.cs" />
+    <Compile Include="Task1\File.cs" />
+    <Compile Include="Task1\Flash.cs" />
+    <Compile Include="Task1\Hdd.cs" />
+    <Compile Include="Task1\Section.cs" />
+    <Compile Include="Task1\Storage.cs" />
+    <Compile Include="Task1\Type.cs" />
+    <Compile Include="Task2\House.cs" />
+    <Compile Include="Task2\IPart.cs" />
+    <Compile Include="Task2\IWorker.cs" />
+    <Compile Include="Task2\Team.cs" />
+    <Compile Include="Task2\TeamLeader.cs" />
+    <Compile Include="Task2\Worker.cs" />
+    <Compile Include="Task3\Administrator.cs" />
+    <Compile Include="Task3\Guest.cs" />
+    <Compile Include="Task3\Moderator.cs" />
+    <Compile Include="Task3\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

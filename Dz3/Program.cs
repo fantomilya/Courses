@@ -9,12 +9,12 @@ namespace Dz3
         public static void Execute()
         {
             var files = Enumerable.Range(1, (int)Math.Ceiling(565 * 1024D / 780)).Select(p => new File(780D / 1024));
-            var storages = new Storage[] { new Flash(100), new Hdd(15, 8), new Dvd(Type.OneSided, 5000)};
-            Console.WriteLine($"Общий объем памяти = {storages.Sum(p=>p.GetCapacity())} ГБ\n");
+            var storages = new Storage[] { new Flash(100, "SomeFlashName", "SomeFlashModel"), new Hdd(15, 8, "SomeHddName", "SomeHddModel"), new Dvd(Type.OneSided, 5000, "SomeDvdName", "SomeDvdModel") };
+            Console.WriteLine($"Общий объем памяти = {storages.Sum(p=>p.GetCapacity()).ToString()} ГБ\n");
             foreach (var storage in storages)
             {
                 int count = 1;
-                Console.WriteLine($"{storage.GetInfo()}\nВремя, необходимое для копирования = " + storage.CalcTime(files.Sum(p=>p.size)) + "с.");
+                Console.WriteLine($"{storage.GetInfo()}\nВремя, необходимое для копирования = " + storage.CalcTime(files.Sum(p=>p.size)).ToString() + "с.");
                 foreach (var file in files)
                 {
                     if (storage.GetFreeMemory() < file.size)
@@ -24,7 +24,7 @@ namespace Dz3
                     }
                     storage.Copy(file);
                 }
-                Console.WriteLine($"Потребуется {count} шт.\n");
+                Console.WriteLine($"Потребуется {count.ToString()} шт.\n");
             }
             Console.ReadKey(true);
         }
