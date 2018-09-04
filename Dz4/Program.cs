@@ -6,7 +6,7 @@ namespace Dz4
 {
     class Program
     {
-        static string s;
+        static string consoleRowsDelimeterString = new string('-', Console.WindowWidth);
         static IEnumerable<int> Squares(params int[] numbers)
         {
             foreach (var v in numbers.Where(p => p % 2 == 1))
@@ -14,17 +14,17 @@ namespace Dz4
         }
         public static void Task1()
         {
-            var v = new[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            Console.WriteLine($"Коллекция: {v.GetString()}\nПосле метода Squares: {Squares(v).GetString()}\n{s}\n");
+            var numbers = new[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            Console.WriteLine($"Задание 1\nКоллекция: {numbers.GetString()}\nПосле метода Squares: {Squares(numbers).GetString()}\n{consoleRowsDelimeterString}\n");
         }
         public static void Task2()
         {
-            var m = new Monthes();
-            Console.WriteLine($"Третий месяц: {m[3].ToString()}\nМесяцы в которых 30 дней: {m.GetMonthesByDaysCount(30).GetString()}\n{s}\n");
+            var monthes = new Monthes();
+            Console.WriteLine($"Задание 2\nТретий месяц: {monthes[3].ToString()}\nМесяцы в которых 30 дней: {monthes.GetMonthesByDaysCount(30).GetString()}\n{consoleRowsDelimeterString}\n");
         }
         public static void Task3()
         {
-            var p = new Purchases
+            var purchases = new Purchases
             {
                 { "Вася Пупкин", "машина" },
                 { "Вася Пупкин", "квартира" },
@@ -38,34 +38,34 @@ namespace Dz4
                 { "Иван Иванович", "машина" },
                 { "Семён Семёныч", "пылесос" }
             };
-            Console.WriteLine($"Все приобретения:\n{p.GetString("\n")}\n\nВсё, что купил Иван Иванович:\n{p.GetCategoresByPurchaser("Иван Иванович").GetString(", ")}\n\nВсе, кто купили пылесос:\n{p.GetPurchasersByCategory("пылесос").GetString(", ")}\n{s}\n");
+            Console.WriteLine($"Задание 3\nВсе приобретения:\n{purchases.GetString("\n")}\n\nВсё, что купил Иван Иванович:\n{purchases.GetCategoresByPurchaser("Иван Иванович").GetString(", ")}\n\nВсе, кто купили пылесос:\n{purchases.GetPurchasersByCategory("пылесос").GetString(", ")}\n{consoleRowsDelimeterString}\n");
         }
         public static void Task4()
         {
-            MyLinkedList<string> l = new MyLinkedList<string>();
-            Console.WriteLine("Создали список");
+            MyLinkedList<string> linkedList = new MyLinkedList<string>();
+            Console.WriteLine("Задание 4\nСоздали список");
 
-            l.Add("new");
-            Console.WriteLine("Add(\"new\");\n" + l.GetString(", ", "\"", "\"") + "\n");
+            linkedList.Add("new");
+            Console.WriteLine("Add(\"new\");\n" + linkedList.GetString(", ", "\"", "\"") + "\n");
 
-            l.Add("Add");
-            Console.WriteLine("Add(\"Add\");\n" + l.GetString(", ", "\"", "\"") + "\n");
+            linkedList.Add("Add");
+            Console.WriteLine("Add(\"Add\");\n" + linkedList.GetString(", ", "\"", "\"") + "\n");
 
-            l.AddAfter("new", "AddAfter");
-            Console.WriteLine("AddAfter(\"new\", \"AddAfter\");\n" + l.GetString(", ", "\"", "\"") + "\n");
+            linkedList.AddAfter("new", "AddAfter");
+            Console.WriteLine("AddAfter(\"new\", \"AddAfter\");\n" + linkedList.GetString(", ", "\"", "\"") + "\n");
 
-            l.AddLast("AddLast");
-            Console.WriteLine("AddLast(\"AddLast\");\n" + l.GetString(", ", "\"", "\"") + "\n");
+            linkedList.AddLast("AddLast");
+            Console.WriteLine("AddLast(\"AddLast\");\n" + linkedList.GetString(", ", "\"", "\"") + "\n");
 
             string[] s = new string[10];
-            l.CopyTo(s, 3);
+            linkedList.CopyTo(s, 3);
             Console.WriteLine("Копируем в новый массив размером 10, начиная с 3 \n" + s.GetString(", ", "\"", "\"") + "\n");
 
-            l.Remove("Add");
-            Console.WriteLine("Remove(\"Add\");\n" + l.GetString(", ", "\"", "\"") + "\n");
+            linkedList.Remove("Add");
+            Console.WriteLine("Remove(\"Add\");\n" + linkedList.GetString(", ", "\"", "\"") + "\n");
 
-            l.Remove("AddLast");
-            Console.WriteLine("Remove(\"AddLast\");\n" + l.GetString(", ", "\"", "\"") + $"\n{s}\n");
+            linkedList.Remove("AddLast");
+            Console.WriteLine("Remove(\"AddLast\");\n" + linkedList.GetString(", ", "\"", "\"") + $"\n{s}\n");
         }
         public static void Task5()
         {
@@ -77,9 +77,9 @@ namespace Dz4
                 new Auto("Honda Torneo", 220, 400000, 7, 4),
                 new Auto("Audi R8 Best", 360, 4200000, 3, 5)
             }.ToArray();
-            Console.WriteLine("Исходный каталог автомобилей: \n" + dic.GetString("\n") + "\n");
+            Console.WriteLine("Задание 5\nИсходный каталог автомобилей: \n" + dic.GetString("\n") + "\n");
             Array.Sort(dic);
-            Console.WriteLine("Отсортированный каталог автомобилей: \n" + dic.GetString("\n") + $"\n{s}\n");
+            Console.WriteLine("Отсортированный каталог автомобилей: \n" + dic.GetString("\n") + $"\n{consoleRowsDelimeterString}\n");
         }
         public static void Task6()
         {
@@ -92,13 +92,12 @@ namespace Dz4
                 new Person { FirstName = "Damon", LastName = "Crauch" }
             }.ToArray();
 
-            Console.WriteLine("Исходный список: \n" + collect.GetString("\n") + "\n");
+            Console.WriteLine("Задание 6\nИсходный список: \n" + collect.GetString("\n") + "\n");
             Array.Sort(collect, (x, y) => (x.LastName + " " + x.FirstName).CompareTo(y.LastName + " " + y.FirstName));
-            Console.WriteLine("Отсортированный список: \n" + collect.GetString("\n") + $"\n{s}\n");
+            Console.WriteLine("Отсортированный список: \n" + collect.GetString("\n") + $"\n{consoleRowsDelimeterString}\n");
         }
         static void Main(string[] args)
         {
-            s = new string('-', Console.WindowWidth);
             Task1();
             Task2();
             Task3();

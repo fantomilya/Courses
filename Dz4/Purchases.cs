@@ -8,14 +8,13 @@ namespace Dz4
     class Purchases : ICollection<Purchase>
     {
         Purchase[] _purchasesArray;
-        int _count { get; set; }
-        public int Count => _count;
+        public int Count { get; private set; }
         public bool IsReadOnly => false;
 
         public Purchases()
         {
             _purchasesArray = new Purchase[5];
-            _count = 0;
+            Count = 0;
         }
 
         public IEnumerable<string> GetPurchasersByCategory(string category) => _purchasesArray.Where(p => p.Category == category).Select(p => p.Purchaser);
@@ -25,10 +24,10 @@ namespace Dz4
         void ICollection<Purchase>.Add(Purchase item)
         {
             TryResize();
-            _purchasesArray[_count] = item;
-            _count++;
+            _purchasesArray[Count] = item;
+            Count++;
         }
-        public void Clear() => _count = 0;
+        public void Clear() => Count = 0;
         bool ICollection<Purchase>.Contains(Purchase item) => _purchasesArray.Contains(item);
         public bool Contains(string purchaser, string category) => (this as ICollection<Purchase>).Contains(new Purchase(purchaser, category));
         public void CopyTo(Purchase[] array, int arrayIndex) => _purchasesArray.CopyTo(array, arrayIndex);
@@ -36,24 +35,20 @@ namespace Dz4
         {
             if (Array.IndexOf(_purchasesArray, item) is var pos && pos != -1)
             {
-                for (int i = pos + 1; i < _count; i++)
+                for (int i = pos + 1; i < Count; i++)
                     _purchasesArray[i - 1] = _purchasesArray[i];
 
-                _count--;
+                Count--;
                 return true;
             }
             return false;
         }
         public bool Remove(string purchaser, string category) => (this as ICollection<Purchase>).Remove(new Purchase(purchaser, category));
-        public IEnumerator<Purchase> GetEnumerator()
-        {
-            foreach (Purchase v in this as IEnumerable)
-                yield return v;
-        }
-        IEnumerator IEnumerable.GetEnumerator() => _purchasesArray.GetEnumerator();
+        public IEnumerator<Purchase> GetEnumerator() => _purchasesArray.Take(Count).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         void TryResize()
         {
-            if (_count == _purchasesArray.Length)
+            if (Count == _purchasesArray.Length)
                 Array.Resize(ref _purchasesArray, _purchasesArray.Length * 2);
         }
     }
