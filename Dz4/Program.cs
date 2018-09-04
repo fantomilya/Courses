@@ -100,18 +100,12 @@ namespace Dz4
         }
         static void Main(string[] args)
         {
-            string[] teams = { "Бавария", "Боруссия", "Реал Мадрид", "Манчестер Сити", "ПСЖ", "Барселона" };
-            var selectedTeams = from t in teams where t.ToUpper().StartsWith("Б") orderby t select t;
-            // изменение массива после определения LINQ-запроса
-            teams[1] = "Ювентус";
-            // выполнение LINQ-запроса
-            foreach (string s in selectedTeams)
-                Console.WriteLine(s);
-
-            teams[1] = "Балаган";
-            // выполнение LINQ-запроса
-            foreach (string s in selectedTeams)
-                Console.WriteLine(s);
+            List<object> o = new List<object> { 1, "asd", 5.5 };
+            List<string> s = new List<string> { "qwe", "dsa", "ewq" };
+            (o as List<string>).Add("");    //контравариантность List<in T>
+            (o as List<string>).First();    //нельзя
+            (s as List<object>).Add(5);     //нельзя
+            (s as List<object>).First();    //ковариантность List<out T>
 
             Task1();
             Task2();
