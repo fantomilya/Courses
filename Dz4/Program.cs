@@ -100,6 +100,19 @@ namespace Dz4
         }
         static void Main(string[] args)
         {
+            string[] teams = { "Бавария", "Боруссия", "Реал Мадрид", "Манчестер Сити", "ПСЖ", "Барселона" };
+            var selectedTeams = from t in teams where t.ToUpper().StartsWith("Б") orderby t select t;
+            // изменение массива после определения LINQ-запроса
+            teams[1] = "Ювентус";
+            // выполнение LINQ-запроса
+            foreach (string s in selectedTeams)
+                Console.WriteLine(s);
+
+            teams[1] = "Балаган";
+            // выполнение LINQ-запроса
+            foreach (string s in selectedTeams)
+                Console.WriteLine(s);
+
             Task1();
             Task2();
             Task3();
@@ -109,4 +122,15 @@ namespace Dz4
             Console.ReadKey();
         }
     }
+    /*
+     * Dictionary<T, K>: Hashtable(порядок не сохраняется) ListDictionary(быстро для <10 элементов, порядок сохраняется) HybridDictionary(ListDictionary, но при >10 преобразуется в Hashtable(долго)) OrderedDictionary(типо HashTable + методы ArrayList(индексатор))
+                         SortedList<T,K>(доступ по индеску, но медленнее при вставке, чем SortedDictionary<T,K>)
+     List<T>: ArrayList
+     
+     Stack - LIFO
+     Queue - FIFO
+     BitArray(для булов, есть методы для побитовых операций)
+     HashSet<T>(не отсортирован, использует хеш-таблицу только ключей), SortedSet<T>(отсортирован, использует черно-красное дерево) - быстрый хешированный поиск, нет доступа по позиции (как типизированный HashTable без значений)
+     
+     */
 }
