@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 
-namespace Les9
+namespace Extensions
 {
-    public static class Extensions
+    public static class OtherExtensions
     {
         public static bool In<T>(this T i, params T[] ints) => ints.Contains(i);
     }

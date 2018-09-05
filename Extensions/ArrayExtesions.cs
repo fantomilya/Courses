@@ -1,11 +1,9 @@
 ﻿using System;
 
-namespace Les4
+namespace Extensions
 {
-    public static class Extensions
+    public static class ArrayExtesions
     {
-        
-
         public static T Max<T>(this T[,] arr)
         where T : IComparable<T>
         {
@@ -39,9 +37,9 @@ namespace Les4
 
             return arr;
         }
-        
+
         public static string AsString<T>(this T[,] arr)
-        where T:IComparable<int>
+        where T : IComparable<int>
         {
             int n = 0;
             bool existsNegative = false;

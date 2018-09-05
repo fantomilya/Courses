@@ -1,17 +1,18 @@
-﻿using System;
+﻿using Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Dz4
 {
-    class MyLinkedList<T> : IList<T> where T : IComparable<T>
+    class GGLinkedList<T> : IList<T> where T : IComparable<T>
     {
         Node<T> First { get; set; }
         Node<T> Last { get; set; }
 
-        public MyLinkedList() { }
-        public MyLinkedList(T n) => First = Last = new Node<T>(n);
+        public GGLinkedList() { }
+        public GGLinkedList(T n) => First = Last = new Node<T>(n);
 
         public T this[int index]
         {
