@@ -146,7 +146,7 @@ namespace LinkedList
         {
             var currentNode = Last;
 
-            while (!(currentNode == null && (value == null ? currentNode.Value == null : currentNode.Value.Equals(value))))
+            while (!(currentNode == null || (value == null ? currentNode.Value == null : currentNode.Value.Equals(value))))
                 currentNode = currentNode.Previous;
 
             return currentNode;

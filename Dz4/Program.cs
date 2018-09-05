@@ -158,69 +158,7 @@ namespace Dz4
             Console.WriteLine(result);
             Console.WriteLine();
         }
-        //This code example produces the following output:
-        //
-        //The linked list values:
-        //the fox jumped over the dog
 
-        //Test 1: Add 'today' to beginning of the list:
-        //today the fox jumped over the dog
-
-        //Test 2: Move first node to be last node:
-        //the fox jumped over the dog today
-
-        //Test 3: Change the last node to 'yesterday':
-        //the fox jumped over the dog yesterday
-
-        //Test 4: Move last node to be first node:
-        //yesterday the fox jumped over the dog
-
-        //Test 5: Indicate last occurence of 'the':
-        //the fox jumped over (the) dog
-
-        //Test 6: Add 'lazy' and 'old' after 'the':
-        //the fox jumped over (the) lazy old dog
-
-        //Test 7: Indicate the 'fox' node:
-        //the (fox) jumped over the lazy old dog
-
-        //Test 8: Add 'quick' and 'brown' before 'fox':
-        //the quick brown (fox) jumped over the lazy old dog
-
-        //Test 9: Indicate the 'dog' node:
-        //the quick brown fox jumped over the lazy old (dog)
-
-        //Test 10: Throw exception by adding node (fox) already in the list:
-        //Exception message: The LinkList node belongs a LinkList.
-
-        //Test 11: Move a referenced node (fox) before the current node (dog):
-        //the quick brown jumped over the lazy old fox (dog)
-
-        //Test 12: Remove current node (dog) and attempt to indicate it:
-        //Node 'dog' is not in the list.
-
-        //Test 13: Add node removed in test 11 after a referenced node (brown):
-        //the quick brown (dog) jumped over the lazy old fox
-
-        //Test 14: Remove node that has the value 'old':
-        //the quick brown dog jumped over the lazy fox
-
-        //Test 15: Remove last node, cast to ICollection, and add 'rhinoceros':
-        //the quick brown dog jumped over the lazy rhinoceros
-
-        //Test 16: Copy the list to an array:
-        //the
-        //quick
-        //brown
-        //dog
-        //jumped
-        //over
-        //the
-        //lazy
-        //rhinoceros
-
-        //Test 17: Clear linked list. Contains 'jumped' = False
-        //
         public static void Task5()
         {
             var dic = new ArrayList()
@@ -253,13 +191,6 @@ namespace Dz4
         }
         static void Main(string[] args)
         {
-            //List<object> o = new List<object> { 1, "asd", 5.5 };
-            //List<string> s = new List<string> { "qwe", "dsa", "ewq" };
-            //(o as List<string>).Add("");    //контравариантность List<in T>
-            //(o as List<string>).First();    //нельзя
-            //(s as List<object>).Add(5);     //нельзя
-            //(s as List<object>).First();    //ковариантность List<out T>
-
             //Task1();
             //Task2();
             //Task3();
@@ -267,6 +198,11 @@ namespace Dz4
             //Task5();
             //Task6();
             Console.ReadKey();
+        }
+        static void Try(string str, string s, bool match = true)
+        {
+            if (str.Like(s) != match)
+                Console.WriteLine($"Error \"{str}\" {(match?"like": "not like")} \"{s}\"");
         }
         /*
          * Dictionary<T, K>: Hashtable(порядок не сохраняется) ListDictionary(быстро для <10 элементов, порядок сохраняется) HybridDictionary(ListDictionary, но при >10 преобразуется в Hashtable(долго)) OrderedDictionary(типо HashTable + методы ArrayList(индексатор))

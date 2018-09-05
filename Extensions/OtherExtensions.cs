@@ -13,5 +13,7 @@ namespace Extensions
 
         public static bool Between<T>(this T item, T left, T right, IComparer<T> comparer, bool includeLeft = true, bool includeRight = true) =>
             comparer.Compare(item, left) >= (includeLeft ? 0 : 1) && comparer.Compare(item, right) <= (includeRight ? 0 : 1);
+
+        public static bool IsNull<T>(this T item) => item is ValueType ? false : item == null; 
     }
 }
