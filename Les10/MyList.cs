@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -178,7 +179,7 @@ namespace Les10
         private bool IsValueExists(int index)
         {
             locker.EnterReadLock();
-            bool exists = index < Count && index >= 0;
+            bool exists = index.Between(0, Count - 1);
             locker.ExitReadLock();
             return exists;
         }

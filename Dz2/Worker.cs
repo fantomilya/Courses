@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -46,7 +47,7 @@ namespace Dz2
                 try
                 {
                     int year = int.Parse(Console.ReadLine());
-                    if (year < 1900 || year > DateTime.Today.Year)
+                    if (!year.Between(1900, DateTime.Today.Year))
                         throw new Exception("Неверный формат года.");
 
                     Add(new Worker(fio, position, year));

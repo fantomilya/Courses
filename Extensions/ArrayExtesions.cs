@@ -15,7 +15,7 @@ namespace Extensions
             return max;
         }
 
-        public static T FindMax<T>(this T[][] arr)
+        public static T Max<T>(this T[][] arr)
             where T : IComparable<T>
         {
             var max = arr[0][0];
@@ -56,10 +56,7 @@ namespace Extensions
             for (int i = 0; i < arr.GetLength(0); i++)
             {
                 for (int j = 0; j < arr.GetLength(1); j++)
-                {
-                    int right = arr[i, j].CompareTo(0) >= 0 && existsNegative ? n : n + 1;
-                    res += arr[i, j].ToString().PadRight(right, ' ').PadLeft(n + 1, ' ');
-                }
+                    res += arr[i, j].ToString().PadRight(arr[i, j].CompareTo(0) >= 0 && existsNegative ? n : n + 1, ' ').PadLeft(n + 1, ' ');
 
                 res = res.TrimEnd(' ') + "".PadRight((n + 1) / 2, '\n');
             }

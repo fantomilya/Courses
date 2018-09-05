@@ -1,4 +1,5 @@
 ﻿using Dz1.Ducks;
+using Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Dz1
         }
         public void Kill(int index)
         {
-            if (index > 0 && index < Count)
+            if (index.Between(0, Count, false, false))
             {
                 this[index].Fly = () => Console.WriteLine("I can't fly-------------------------------------");
                 this[index].Talk = () => Console.WriteLine("I can't talk------------------------------------");

@@ -47,7 +47,7 @@ namespace Dz4
         public bool Contains(T item) => this[item] != null;
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (arrayIndex < 0 || arrayIndex + Count > array.Length)
+            if (!arrayIndex.Between(0, array.Length - Count))
                 return;
 
             int i = 0;
@@ -96,7 +96,7 @@ namespace Dz4
         }
         public bool Remove(T item)
         {
-            if(IndexOf(item) is var index && index >=0 && index < Count)
+            if(IndexOf(item) is var index && index.Between(0, Count - 1))
             {
                 RemoveAt(index);
                 return true;
@@ -121,7 +121,7 @@ namespace Dz4
         Node<T> GetNodeByIndex(int index)
         {
             var currentCount = Count;
-            if (index < 0 || index >= currentCount)
+            if (!index.Between(0, currentCount - 1))
                 return null;
 
             bool fromStart = index < Count / 2;

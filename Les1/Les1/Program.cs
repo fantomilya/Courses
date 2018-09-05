@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extensions;
+using System;
 using System.Linq;
 
 namespace Les1
@@ -37,19 +38,19 @@ namespace Les1
             Console.WriteLine("Задание 1");
             switch (ReadDouble("Введите число = "))
             {
-                case double d when d >= 0 && d < 15:
+                case double d when d.Between(0, 15, includeRight:false):
                     Console.WriteLine("От 0 до 14");
                     break;
-                case double d when d >= 15 && d < 36:
+                case double d when d.Between(15, 36, includeRight: false):
                     Console.WriteLine("От 15 до 35");
                     break;
-                case double d when d >= 36 && d < 50:
+                case double d when d.Between(36, 50, includeRight: false):
                     Console.WriteLine("От 36 до 50");
                     break;
                 case double d when d == 50:
                     Console.WriteLine("От 36 до 50 и от 50 до 100");
                     break;
-                case double d when d > 50 && d < 101:
+                case double d when d.Between(50, 101, false, false):
                     Console.WriteLine("От 50 до 100");
                     break;
                 default:

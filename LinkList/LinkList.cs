@@ -2,10 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LinkedList
 {
-    [System.Runtime.InteropServices.ComVisible(false)]
     public class LinkList<T> : ICollection<T>, IEnumerable<T>, IEnumerable, ICollection, IReadOnlyCollection<T>
         where T : IEquatable<T>
     {
@@ -25,12 +25,6 @@ namespace LinkedList
         object ICollection.SyncRoot => null;
         bool ICollection.IsSynchronized => false;
 
-        public LinkListNode<T> AddAfter(LinkListNode<T> node, T value)
-        {
-            var newNode = new LinkListNode<T>(value);
-            AddAfter(node, newNode);
-            return newNode;
-        }
         public void AddAfter(LinkListNode<T> node, LinkListNode<T> newNode)
         {
             if (newNode.List != null || (node?.List ?? this) != this)
@@ -57,9 +51,15 @@ namespace LinkedList
                 newNode.Previous = node;
                 node.Next = newNode;
             }
-            
+
             newNode.List = this;
             Count++;
+        }
+        public LinkListNode<T> AddAfter(LinkListNode<T> node, T value)
+        {
+            var newNode = new LinkListNode<T>(value);
+            AddAfter(node, newNode);
+            return newNode;
         }
         public LinkListNode<T> AddBefore(LinkListNode<T> node, T value)
         {
@@ -70,9 +70,10 @@ namespace LinkedList
         public void AddBefore(LinkListNode<T> node, LinkListNode<T> newNode) => AddAfter(node?.Previous, newNode);
         public LinkListNode<T> AddFirst(T value) => AddBefore(First, value);
         public void AddFirst(LinkListNode<T> node) => AddBefore(First, node);
-        void ICollection<T>.Add(T item) => AddLast(item);
         public LinkListNode<T> AddLast(T value) => AddAfter(Last, value);
         public void AddLast(LinkListNode<T> node) => AddAfter(Last, node);
+        void ICollection<T>.Add(T item) => AddLast(item);
+
         public void Clear()
         {
             var currentNode = First;
@@ -89,37 +90,6 @@ namespace LinkedList
         {
             node.Previous = node.Next = null;
             node.List = null;
-        }
-        public bool Contains(T value) => Find(value) != null;
-        public void CopyTo(T[] array, int index)
-        {
-            foreach (var v in this)
-                array[index++] = v;
-        }
-        void ICollection.CopyTo(Array array, int index) => CopyTo(array as T[], index);
-        public LinkListNode<T> Find(T value)
-        {
-            var currentNode = First;
-            if (value == null)
-                while (currentNode != null && currentNode.Value != null)
-                    currentNode = currentNode.Next;
-            else
-                while (currentNode != null && !currentNode.Value.Equals(value))
-                    currentNode = currentNode.Next;
-
-            return currentNode;
-        }
-        public LinkListNode<T> FindLast(T value)
-        {
-            var currentNode = Last;
-            if (value == null)
-                while (currentNode != null && currentNode.Value != null)
-                    currentNode = currentNode.Previous;
-            else
-                while (currentNode != null && !currentNode.Value.Equals(value))
-                    currentNode = currentNode.Previous;
-
-            return currentNode;
         }
         public bool Remove(T value)
         {
@@ -141,21 +111,6 @@ namespace LinkedList
                 return;
             }
 
-            //if (node == First)
-            //{
-            //    node.Next.Previous = null;
-            //    First = node.Next;
-            //}
-            //else if (node == Last)
-            //{
-            //    node.Previous.Next = null;
-            //    Last = node.Previous;
-            //}
-            //else
-            //{
-            //    node.Previous.Next = node.Next;
-            //    node.Next.Previous = node.Previous;
-            //}
             if (node.Previous is LinkListNode<T> prevNode)
                 prevNode.Next = node.Next;
             else
@@ -176,18 +131,38 @@ namespace LinkedList
         }
         public void RemoveFirst() => Remove(First);
         public void RemoveLast() => Remove(Last);
+        public bool Contains(T value) => Find(value) != null;
+        public void CopyTo(T[] array, int index)
+        {
+            if (index + Count > array.Length)
+                return;
 
-        IEnumerable<T> ToEnumerable()
+            foreach (var v in this)
+                array[index++] = v;
+        }
+        void ICollection.CopyTo(Array array, int index) => CopyTo(array as T[], index);
+        public LinkListNode<T> Find(T value) => ToEnumerable().FirstOrDefault(p=> value == null ? p.Value == null : p.Value.Equals(value));
+        public LinkListNode<T> FindLast(T value)
+        {
+            var currentNode = Last;
+
+            while (!(currentNode == null && (value == null ? currentNode.Value == null : currentNode.Value.Equals(value))))
+                currentNode = currentNode.Previous;
+
+            return currentNode;
+        }
+
+        IEnumerable<LinkListNode<T>> ToEnumerable()
         {
             var currentNode = First;
             while (currentNode != null)
             {
-                yield return currentNode.Value;
+                yield return currentNode;
                 currentNode = currentNode.Next;
             }
         }
-        IEnumerator<T> IEnumerable<T>.GetEnumerator() => ToEnumerable().GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => ToEnumerable().GetEnumerator();
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => ToEnumerable().Select(p => p.Value).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => (this as IEnumerable<T>).GetEnumerator();
 
         public override string ToString() => ToEnumerable().GetString(", ", "\"", "\"");
     }
@@ -195,10 +170,7 @@ namespace LinkedList
     public class LinkListNode<T>
         where T : IEquatable<T>
     {
-        public LinkListNode(T value) : this(value, null)
-        {
-
-        }
+        public LinkListNode(T value) : this(value, null) { }
         public LinkListNode(T value, LinkList<T> list)
         {
             Value = value;

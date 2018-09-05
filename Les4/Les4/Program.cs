@@ -79,7 +79,7 @@ namespace Les4
                 Console.ResetColor();
 
                 int op = ConsoleGetNumberInt("Enter the number of selected operation: ", "Invalid operation",
-                    p => p > 0 && p < 9);
+                    p => p.Between(0, 9, false, false));
 
                 double k1 = 0, k2 = 0;
                 if (op < 7)
