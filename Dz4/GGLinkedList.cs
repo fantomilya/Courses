@@ -1,17 +1,18 @@
-﻿using System;
+﻿using Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Dz4
 {
-    internal class MyLinkedList<T> : IList<T> where T : IComparable<T>
+    class GGLinkedList<T> : IList<T> where T : IComparable<T>
     {
         private Node<T> First { get; set; }
         private Node<T> Last { get; set; }
 
-        public MyLinkedList() { }
-        public MyLinkedList(T n) => First = Last = new Node<T>(n);
+        public GGLinkedList() { }
+        public GGLinkedList(T n) => First = Last = new Node<T>(n);
 
         public T this[int index]
         {
@@ -46,7 +47,7 @@ namespace Dz4
         public bool Contains(T item) => this[item] != null;
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (arrayIndex < 0 || arrayIndex + Count > array.Length)
+            if (!arrayIndex.Between(0, array.Length - Count))
                 return;
 
             int i = 0;
@@ -97,7 +98,7 @@ namespace Dz4
         }
         public bool Remove(T item)
         {
-            if (IndexOf(item) is int index && index >= 0 && index < Count)
+            if(IndexOf(item) is var index && index.Between(0, Count - 1))
             {
                 RemoveAt(index);
                 return true;
@@ -123,7 +124,7 @@ namespace Dz4
         private Node<T> GetNodeByIndex(int index)
         {
             int currentCount = Count;
-            if (index < 0 || index >= currentCount)
+            if (!index.Between(0, currentCount - 1))
                 return null;
 
             bool fromStart = index < Count / 2;

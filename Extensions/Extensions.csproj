@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A3CAF1E4-CDBE-4658-BD98-333D3D3ED1C5}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Dz1</RootNamespace>
-    <AssemblyName>Dz1</AssemblyName>
+    <ProjectGuid>{BBA7419A-1E68-45AF-A7EA-3E0144CBB060}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Extensions</RootNamespace>
+    <AssemblyName>Extensions</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,23 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ducks\BaseDuck.cs" />
-    <Compile Include="Ducks\ExoticDuck.cs" />
-    <Compile Include="Ducks\SiliconDuck.cs" />
-    <Compile Include="Ducks\SimpleDuck.cs" />
-    <Compile Include="Ducks\WoodenDuck.cs" />
-    <Compile Include="Lake.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="ArrayExtesions.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="OtherExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Extensions\Extensions.csproj">
-      <Project>{BBA7419A-1E68-45AF-A7EA-3E0144CBB060}</Project>
-      <Name>Extensions</Name>
-    </ProjectReference>
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

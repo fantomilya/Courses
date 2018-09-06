@@ -1,11 +1,9 @@
 ﻿using System;
 
-namespace Les4
+namespace Extensions
 {
-    public static class Extensions
+    public static class ArrayExtesions
     {
-        
-
         public static T Max<T>(this T[,] arr)
         where T : IComparable<T>
         {
@@ -17,7 +15,7 @@ namespace Les4
             return max;
         }
 
-        public static T FindMax<T>(this T[][] arr)
+        public static T Max<T>(this T[][] arr)
             where T : IComparable<T>
         {
             var max = arr[0][0];
@@ -39,9 +37,9 @@ namespace Les4
 
             return arr;
         }
-        
+
         public static string AsString<T>(this T[,] arr)
-        where T:IComparable<int>
+        where T : IComparable<int>
         {
             int n = 0;
             bool existsNegative = false;
@@ -58,10 +56,7 @@ namespace Les4
             for (int i = 0; i < arr.GetLength(0); i++)
             {
                 for (int j = 0; j < arr.GetLength(1); j++)
-                {
-                    int right = arr[i, j].CompareTo(0) >= 0 && existsNegative ? n : n + 1;
-                    res += arr[i, j].ToString().PadRight(right, ' ').PadLeft(n + 1, ' ');
-                }
+                    res += arr[i, j].ToString().PadRight(arr[i, j].CompareTo(0) >= 0 && existsNegative ? n : n + 1, ' ').PadLeft(n + 1, ' ');
 
                 res = res.TrimEnd(' ') + "".PadRight((n + 1) / 2, '\n');
             }
