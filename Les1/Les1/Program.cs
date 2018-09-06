@@ -75,7 +75,7 @@ namespace Les1
             if (b > 0 && b - a > 1)
             {
                 Console.WriteLine("Сумма чисел в промежутке: " + Enumerable.Range(a + 1, b - a - 1).DefaultIfEmpty().Sum());
-                Console.WriteLine("Нечетные числа в промежутке: " + Enumerable.Range(a + 1, b - a - 1).Where(p => p % 2 == 1).DefaultIfEmpty().Select(p => p + " ").Aggregate(string.Concat).Trim() + '\n');
+                Console.WriteLine("Нечетные числа в промежутке: " + Enumerable.Range(a + 1, b - a - 1).Where(p => p % 2 == 1).GetString() + '\n');
             }
 
             Console.ReadKey(true);

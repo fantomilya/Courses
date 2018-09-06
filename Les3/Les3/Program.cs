@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extensions;
+using System;
 using System.Linq;
 
 namespace Les3
@@ -21,7 +22,7 @@ namespace Les3
         }
         static string BinaryToNegative(string s)
         {
-            var result = s.Select(p => p == '0'? '1': '0').Select(p=>p.ToString()).Aggregate(string.Concat).TrimEnd('1');
+            var result = s.Select(p => p == '0'? '1': '0').GetString("").TrimEnd('1');
             return result.Substring(0, result.Length - 1) + "1".PadRight(s.Length - result.Length + 1, '0');
         }
         static string ToBinary(byte number, int startBitNumber = 0)
@@ -140,7 +141,7 @@ namespace Les3
             Console.WriteLine(Convert1(0));
 
             //for (uint i = uint.MinValue; i <= uint.MaxValue; i++)
-            //    if (ToBinary(i).Replace(" ", "").TrimStart('0').DefaultIfEmpty('0').Select(p => p.ToString()).Aggregate(string.Concat) is var b1 && Convert.ToString(i, 2) is var b2 && b1 != b2)
+            //    if (ToBinary(i).Replace(" ", "").TrimStart('0').DefaultIfEmpty('0').Select(p => p.ToString()).Combine() is var b1 && Convert.ToString(i, 2) is var b2 && b1 != b2)
             //        Console.WriteLine($"{i.GetType().Name} {i}\n   {b1}\n   !=\n   {b2}\n");
             
             int x = -5, y = 0;

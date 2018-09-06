@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extensions;
+using System;
 using System.Linq;
 
 namespace Les10
@@ -20,7 +21,7 @@ namespace Les10
         }
         public string this[string index]
         {
-            get => this.Where(p => p.Name.ToLower() == index.ToLower()).Select(p=>p.ToString() + " ").DefaultIfEmpty("Ничего нет").Aggregate(string.Concat).Trim();
+            get => this.Where(p => p.Name.ToLower() == index.ToLower()).GetString(@default: "Ничего нет");
         }
     }
     class Article :IComparable<Article >

@@ -65,10 +65,10 @@ namespace Dz2
         {
             Console.WriteLine("\nВведите стаж для поиска: ");
             if (int.TryParse(Console.ReadLine(), out int exp))
-                Console.WriteLine(this.Where(p => p.GetExperience() > exp).Select(p => p.ToString() + '\n').DefaultIfEmpty("Ни одного работника не найдено").Aggregate(string.Concat));
+                Console.WriteLine(this.Where(p => p.GetExperience() > exp).GetString("\n", @default: "Ни одного работника не найдено"));
             else
                 Console.WriteLine("Не удалось преобразовать стаж в число.");
         }
-        public override string ToString() => Count > 0 ? this.Select(p => p.ToString() + '\n').Aggregate(string.Concat) : "";
+        public override string ToString() => this.GetString("\n");
     }
 }

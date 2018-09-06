@@ -154,7 +154,7 @@ namespace Les10
         public override string ToString()
         {
             locker.EnterWriteLock();
-            string s = Count > 0 ? arr.Take(Count).Select(p => p.ToString() + " ").Aggregate(string.Concat).Trim() : string.Empty;
+            string s = Count > 0 ? arr.Take(Count).GetString() : string.Empty;
             locker.ExitWriteLock();
             return s;
         }
