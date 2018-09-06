@@ -1,13 +1,14 @@
 ﻿using System;
 
-class BaseClass
+internal class BaseClass
 {
     public virtual void Method()
     {
         Console.WriteLine("Method from BaseClass");
     }
 }
-class DerivedClass : BaseClass
+
+internal class DerivedClass : BaseClass
 {
     // Переопределение метода базового класса.
 
@@ -16,7 +17,8 @@ class DerivedClass : BaseClass
         Console.WriteLine("Method from DerivedClass");
     }
 }
-class Derived : DerivedClass
+
+internal class Derived : DerivedClass
 {
     // Переопределение метода базового класса.
 
@@ -25,9 +27,10 @@ class Derived : DerivedClass
         Console.WriteLine("Method from DerivedClass");
     }
 }
-class Program
+
+internal class Program
 {
-    static void Main()
+    private static void Main()
     {
         DerivedClass instance = new DerivedClass();
         instance.Method();

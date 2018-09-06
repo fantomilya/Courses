@@ -43,8 +43,8 @@ namespace Dz5
             }
         }
 
-        public bool Equals(EmployeeId other) => other != null && (ReferenceEquals(other, this) || (prefix == other.prefix && number == other.number));
-        public override bool Equals(object obj) => obj != null && (ReferenceEquals(obj, this) || (obj is Employee emp && Equals(this, emp)));
+        public bool Equals(EmployeeId other) => prefix == other.prefix && number == other.number;
+        public override bool Equals(object obj) => obj != null && obj is Employee emp;
         public override string ToString() => $"{prefix.ToString()}{number,6:000000}";
         public override int GetHashCode() => (number ^ number << 16) * 0x15051505;
         public static bool operator ==(EmployeeId left, EmployeeId right) => left.Equals(right);

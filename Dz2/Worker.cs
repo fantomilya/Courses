@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Dz2
 {
-    struct Worker : IComparable<Worker>
+    internal struct Worker : IComparable<Worker>
     {
         private readonly string _fio;
         private readonly string _position;
@@ -22,7 +22,8 @@ namespace Dz2
         public int GetExperience() => DateTime.Today.Year - _year;
         public override string ToString() => $"{_position} {_fio}, работающий с {_year} г.";
     }
-    class SortedWorkers : List<Worker>
+
+    internal class SortedWorkers : List<Worker>
     {
         private static readonly Random Rand = new Random();
 

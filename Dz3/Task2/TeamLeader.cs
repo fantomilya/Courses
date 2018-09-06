@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Dz3
 {
-    class TeamLeader : IWorker
+    internal class TeamLeader : IWorker
     {
         public void Work(House house)
         {

@@ -2,7 +2,7 @@
 
 namespace Les9
 {
-    class Point
+    internal class Point
     {
         private int x;
         private int y;

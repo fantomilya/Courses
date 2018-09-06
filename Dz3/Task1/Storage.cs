@@ -16,10 +16,10 @@
         • расчет необходимого количества носителей информации представленных типов для переноса информации.
         Емкость носителей информации должна быть указана в Гб, скорость копирования в Кб.
      */
-    abstract class Storage
+    internal abstract class Storage
     {
-        string Name { get; set; }
-        string Model { get; set; }
+        private string Name { get; set; }
+        private string Model { get; set; }
         public abstract double GetCapacity();
         public abstract double Copy(params File[] files);
         public abstract double GetFreeMemory();

@@ -2,9 +2,9 @@
 
 namespace Les10
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             MyList<int> list = new MyList<int> { 1, 2, 3, 4, 5 };
             list.RemoveAt(0);

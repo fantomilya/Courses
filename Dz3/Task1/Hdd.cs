@@ -3,10 +3,10 @@ using System.Linq;
 
 namespace Dz3
 {
-    class Hdd : Storage
+    internal class Hdd : Storage
     {
-        const double speed = 61440;
-        List<Section> sections;
+        private const double speed = 61440;
+        private List<Section> sections;
 
         public Hdd(int sectionsCount, double sectionCapacity, string name, string model):base(name, model) =>
             sections = new List<Section>(Enumerable.Range(1, sectionsCount).Select(p => new Section(sectionCapacity)));

@@ -1,11 +1,11 @@
 ﻿using System;
 
-interface IInterface
+internal interface IInterface
 {
     void Method();
 }
 
-class BaseClass
+internal class BaseClass
 {
     public void Method()
     {
@@ -13,15 +13,15 @@ class BaseClass
     }
 }
 
-class DerivedClass : BaseClass, IInterface
+internal class DerivedClass : BaseClass, IInterface
 {
     // Реализация интерфейса не обязательна, т.к., 
     // сигнатуры методов в классе и интерфейсе совпадают.
 }
 
-class Program
+internal class Program
 {
-    static void Main()
+    private static void Main()
     {
         DerivedClass instance = new DerivedClass();
         instance.Method();

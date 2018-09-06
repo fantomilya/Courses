@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Dz4
 {
-    class GGLinkedList<T> : IList<T> where T : IComparable<T>
+    internal class GGLinkedList<T> : IList<T> where T : IComparable<T>
     {
         private Node<T> First { get; set; }
         private Node<T> Last { get; set; }

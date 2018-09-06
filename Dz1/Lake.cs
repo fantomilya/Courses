@@ -6,14 +6,14 @@ using System.Linq;
 
 namespace Dz1
 {
-    class Lake:List<BaseDuck>
+    internal class Lake:List<BaseDuck>
     {
         public Lake()
         {
             AddRange(new BaseDuck[] { new SimpleDuck(), new ExoticDuck(), new SiliconDuck(), new WoodenDuck() });
         }
 
-        void Show()
+        private void Show()
         {
             Console.WriteLine(new string('-', Console.WindowWidth));
             foreach (var d in this)

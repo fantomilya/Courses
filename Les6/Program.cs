@@ -3,14 +3,15 @@ using System.Linq;
 
 namespace Les6
 {
-    enum Diraction
+    internal enum Diraction
     {
         Left,
         Down,
         Right,
         Up
     }
-    class Program
+
+    internal class Program
     {
         public static Random rand = new Random();
         public static void Task1()
@@ -418,7 +419,8 @@ namespace Les6
             //2-мерн масс, не неч по всем измерениям. Заполнить улиткой с середины.
             throw new NotImplementedException();
         }
-        static void Main()
+
+        private static void Main()
         {
             Task17();
             Console.ReadKey(true);

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Dz3
 {
-    class Section
+    internal class Section
     {
         public double Capacity { get; private set; }
         public List<File> files { get; private set; }

@@ -2,7 +2,7 @@
 
 namespace Les7
 {
-    partial class Bike
+    internal partial class Bike
     {
         public double MaxSpeed { get; set; }
         public double Weight { get; set; }

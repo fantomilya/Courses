@@ -37,23 +37,28 @@ namespace Dz3
                 DonePercents = 100;
         }
     }
-    class Basement : Part
+
+    internal class Basement : Part
     {
         public Basement():base(150, ()=> "фундамент") { }
     }
-    class Wall : Part
+
+    internal class Wall : Part
     {
         public Wall() : base(120, () => "стена") { }
     }
-    class Door : Part
+
+    internal class Door : Part
     {
         public Door() : base(60, () => "дверь") { }
     }
-    class Window : Part
+
+    internal class Window : Part
     {
         public Window() : base(40, () => "окно") { }
     }
-    class Roof : Part
+
+    internal class Roof : Part
     {
         public Roof() : base(130, () => "крыша") { }
     }

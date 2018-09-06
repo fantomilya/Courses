@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace Dz3
 {
-    class Dvd : Storage
+    internal class Dvd : Storage
     {
-        double speed;
-        Type type;
-        List<File> files = new List<File>();
+        private double speed;
+        private Type type;
+        private List<File> files = new List<File>();
 
         public Dvd(Type type, double speed, string name, string model):base(name, model)
         {

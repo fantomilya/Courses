@@ -208,7 +208,8 @@ namespace Dz4
             //Task6();
             Console.ReadKey();
         }
-        static void Try(string str, string s, bool match = true)
+
+        private static void Try(string str, string s, bool match = true)
         {
             if (str.Like(s) != match)
                 Console.WriteLine($"Error \"{str}\" {(match?"like": "not like")} \"{s}\"");

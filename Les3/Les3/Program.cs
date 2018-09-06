@@ -4,15 +4,15 @@ using System.Linq;
 
 namespace Les3
 {
-    class Program
+    internal class Program
     {
-        static void Showinfo() => Console.WriteLine("some info...");
+        private static void Showinfo() => Console.WriteLine("some info...");
 
-        static int Sum(int x1, int x2) => x1 + x2;
+        private static int Sum(int x1, int x2) => x1 + x2;
 
-        static int Fact(int k) => k > 1 ? k * Fact(k - 1) : 1;
+        private static int Fact(int k) => k > 1 ? k * Fact(k - 1) : 1;
 
-        static string AddSpaces(string s)
+        private static string AddSpaces(string s)
         {
             string res = string.Empty;
             for (var i = 0; i < s.Length; i++)
@@ -20,12 +20,14 @@ namespace Les3
 
             return res;
         }
-        static string BinaryToNegative(string s)
+
+        private static string BinaryToNegative(string s)
         {
             var result = s.Select(p => p == '0'? '1': '0').GetString("").TrimEnd('1');
             return result.Substring(0, result.Length - 1) + "1".PadRight(s.Length - result.Length + 1, '0');
         }
-        static string ToBinary(byte number, int startBitNumber = 0)
+
+        private static string ToBinary(byte number, int startBitNumber = 0)
         {
             if (number == 0)
                 return string.Empty;
@@ -36,7 +38,8 @@ namespace Les3
 
             return result;
         }
-        static string ToBinary(ushort number, int startBitNumber = 0)
+
+        private static string ToBinary(ushort number, int startBitNumber = 0)
         {
             if (number == 0)
                 return string.Empty;
@@ -47,7 +50,8 @@ namespace Les3
 
             return result;
         }
-        static string ToBinary(uint number, int startBitNumber = 0)
+
+        private static string ToBinary(uint number, int startBitNumber = 0)
         {
             if (number == 0)
                 return string.Empty;
@@ -58,7 +62,8 @@ namespace Les3
 
             return result;
         }
-        static string ToBinary(ulong number, int startBitNumber = 0)
+
+        private static string ToBinary(ulong number, int startBitNumber = 0)
         {
             if (number == 0)
                 return string.Empty;
@@ -69,7 +74,8 @@ namespace Les3
 
             return result;
         }
-        static string ToBinary(sbyte number, int startBitNumber = 0)
+
+        private static string ToBinary(sbyte number, int startBitNumber = 0)
         {
             if (number == 0)
                 return string.Empty;
@@ -85,7 +91,8 @@ namespace Les3
 
             return result;
         }
-        static string ToBinary(short number, int startBitNumber = 0)
+
+        private static string ToBinary(short number, int startBitNumber = 0)
         {
             if (number == 0)
                 return string.Empty;
@@ -102,8 +109,9 @@ namespace Les3
             return result;
         }
 
-        static string Convert1(int k) => k < 2 ? (k % 2).ToString() : Convert1(k / 2) + k % 2;
-        static string ToBinary(int number, int startBitNumber = 0)
+        private static string Convert1(int k) => k < 2 ? (k % 2).ToString() : Convert1(k / 2) + k % 2;
+
+        private static string ToBinary(int number, int startBitNumber = 0)
         {
             if (number == 0)
                 return "0";
@@ -119,7 +127,8 @@ namespace Les3
 
             return result;
         }
-        static string ToBinary(long number, int startBitNumber = 0)
+
+        private static string ToBinary(long number, int startBitNumber = 0)
         {
             if (number == 0)
                 return string.Empty;
@@ -136,7 +145,7 @@ namespace Les3
             return result;
         }
 
-        static void Main()
+        private static void Main()
         {
             Console.WriteLine(Convert1(0));
 
