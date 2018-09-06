@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Dz5
 {
@@ -14,37 +13,22 @@ namespace Dz5
         {
             void IndicateNode(LinkListNode<string> node, string test)
             {
-                Console.WriteLine(test);
                 if (node.List == null)
                 {
-                    Console.WriteLine("Node '{0}' is not in the list.\n",
-                        node.Value);
+                    Console.WriteLine($"Node '{node.Value}' is not in the list.\n");
                     return;
                 }
 
-                StringBuilder result = new StringBuilder("(" + node.Value + ")");
-                LinkListNode<string> nodeP = node.Previous;
+                var value = node.Value;
+                node.Value = $"({node.Value})";
 
-                while (nodeP != null)
-                {
-                    result.Insert(0, nodeP.Value + " ");
-                    nodeP = nodeP.Previous;
-                }
-
-                node = node.Next;
-                while (node != null)
-                {
-                    result.Append(" " + node.Value);
-                    node = node.Next;
-                }
-
-                Console.WriteLine(result);
-                Console.WriteLine();
+                Console.WriteLine(node.List.GetString(preMessage:test + "\n") + "\n");
+                node.Value = value;
             }
             // Create the link list.
             string[] words = { "the", "fox", "jumped", "over", "the", "dog" };
             LinkList<string> list = new LinkList<string>(words);
-            Console.WriteLine("The linked list values:\n" + list.ToString());
+            Console.WriteLine("The linked list values:\n" + list.ToString() + "\n");
             Console.WriteLine($"sentence.Contains(\"jumped\") = {list.Contains("jumped")}\n");
             // Add the word 'today' to the beginning of the linked list.
             list.AddFirst("today");
@@ -124,13 +108,13 @@ namespace Dz5
         }
         static void TaskFish()
         {
-            var duplicates = new Hashtable();// new InsensitiveComparer() as IEqualityComparer);
+            var duplicates = new Hashtable(new InsensitiveComparer() as IEqualityComparer);
             var key1 = new Fish("Herring");
             var key2 = new Fish("Herring");
             duplicates[key1] = "Hello";
             duplicates[key2] = "Hello2";
-            Console.WriteLine((duplicates as IEnumerable<Fish>).GetString(", ", "\"", "\"", "", postMessage: $". (Count={duplicates.Count})"));
-            Console.WriteLine("\n" + new string('-', Console.WindowWidth));
+            Console.WriteLine(duplicates.Cast<DictionaryEntry>().GetString(", ", "\"", "\"", "", postMessage: $". (Count={duplicates.Count})", predicate: p => p.Value.ToString()));
+            Console.WriteLine(new string('-', Console.WindowWidth));
         }
         static void TaskEmployee()
         {
@@ -181,40 +165,13 @@ namespace Dz5
             }
             Console.WriteLine("\n" + new string('-', Console.WindowWidth));
         }
+
         static void Main(string[] args)
         {
-            var l = Enumerable.Range(0, 20000).ToList();
-
-            var e = Enumerable.Range(1, 10).ToList();
-
-            long t1 = 0, t2 = 0, t3 = 0;
-            string s1 = "    -    ", s2 = "    -    ", s3 = "    -    ";
-            int n = 15;
-
-            l.GetStringBenchmark1();
-
-            for (int i = 0; i < n; i++)
-            {
-                long t;
-
-                t = l.GetStringBenchmark1();
-                t1 += t;
-                s1 += t + " ";
-
-                t = l.GetStringBenchmark2();
-                t2 += t;
-                s2 += t + " ";
-
-                t = l.GetStringBenchmark3();
-                t3 += t;
-                s3 += t + " ";
-            }
-
-            Console.WriteLine("\n" + (t1 / (double)n).ToString("0.##") + s1 + "\n" + (t2 / (double)n).ToString("0.##") + s2 + "\n" + (t3 / (double)n).ToString("0.##") + s3 + "\n");
-            Console.ReadKey(true);
             //TaskList();
             //TaskFish();
             //TaskEmployee();
+            Console.ReadKey(true);
         }
     }
 }

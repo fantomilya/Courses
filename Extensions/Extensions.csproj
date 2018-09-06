@@ -44,6 +44,7 @@
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="OtherExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomExtensions.cs" />
     <Compile Include="StringBuilderExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>

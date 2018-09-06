@@ -21,7 +21,7 @@ namespace Les10
         }
         public string this[string index]
         {
-            get => this.Where(p => p.Name.ToLower() == index.ToLower()).GetString(@default: "Ничего нет");
+            get => this.Where(p => p.Name.ToLower() == index.ToLower()).GetString(defaultIfEmpty: "Ничего нет");
         }
     }
     class Article :IComparable<Article >

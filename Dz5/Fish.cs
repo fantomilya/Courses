@@ -8,6 +8,7 @@ namespace Dz5
         public string Name { get; }
         public Fish(string name) => Name = name;
     }
+
     public class InsensitiveComparer : IEqualityComparer<Fish>
     {
         static readonly CaseInsensitiveComparer comparer = new CaseInsensitiveComparer();
