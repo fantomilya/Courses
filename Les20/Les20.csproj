@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BFB159AD-9DD5-4B0D-8001-1E86FAAA2D95}</ProjectGuid>
+    <ProjectGuid>{8EDBE163-53D9-4CCE-A4DE-21CB372B503A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Dz4</RootNamespace>
-    <AssemblyName>Dz4</AssemblyName>
+    <RootNamespace>Les20</RootNamespace>
+    <AssemblyName>Les20</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,20 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auto.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Monthes.cs" />
-    <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Purchases.cs" />
-    <Compile Include="MyLinkedList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="-aI2Qwb0Sg4.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

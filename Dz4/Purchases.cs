@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace Dz4
 {
-    class Purchases : ICollection<Purchase>
+    internal class Purchases : ICollection<Purchase>
     {
-        Purchase[] _purchasesArray;
+        private Purchase[] _purchasesArray;
         public int Count { get; private set; }
         public bool IsReadOnly => false;
 
@@ -33,7 +33,7 @@ namespace Dz4
         public void CopyTo(Purchase[] array, int arrayIndex) => _purchasesArray.CopyTo(array, arrayIndex);
         bool ICollection<Purchase>.Remove(Purchase item)
         {
-            if (Array.IndexOf(_purchasesArray, item) is var pos && pos != -1)
+            if (Array.IndexOf(_purchasesArray, item) is int pos && pos != -1)
             {
                 for (int i = pos + 1; i < Count; i++)
                     _purchasesArray[i - 1] = _purchasesArray[i];
@@ -46,10 +46,24 @@ namespace Dz4
         public bool Remove(string purchaser, string category) => (this as ICollection<Purchase>).Remove(new Purchase(purchaser, category));
         public IEnumerator<Purchase> GetEnumerator() => _purchasesArray.Take(Count).GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-        void TryResize()
+
+        private void TryResize()
         {
             if (Count == _purchasesArray.Length)
                 Array.Resize(ref _purchasesArray, _purchasesArray.Length * 2);
         }
+    }
+    internal struct Purchase
+    {
+        public string Purchaser { get; }
+        public string Category { get; }
+
+        public Purchase(string purchaser, string category) : this()
+        {
+            Purchaser = purchaser;
+            Category = category;
+        }
+
+        public override string ToString() => $"{Purchaser} - {Category}";
     }
 }

@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace Dz4
 {
-    class Monthes : IEnumerable<Month>
+    internal class Monthes : IEnumerable<Month>
     {
-        Month[] MonthesArray { get; }
+        private Month[] MonthesArray { get; }
 
         public Monthes() : this(DateTime.Today.Year) { }
         public Monthes(int year)
@@ -19,11 +19,35 @@ namespace Dz4
 
         public Month this[int index] => index > 0 && index < 13 ? MonthesArray[index - 1] : default(Month);
         IEnumerator IEnumerable.GetEnumerator() => MonthesArray.GetEnumerator();
-        public IEnumerator<Month> GetEnumerator()
-        {
-            foreach (var v in MonthesArray)
-                yield return v;
-        }
+        public IEnumerator<Month> GetEnumerator() => ((IEnumerable<Month>)MonthesArray).GetEnumerator();
         public IEnumerable<Month> GetMonthesByDaysCount(int daysCount) => MonthesArray.Where(p => p.DaysCount == daysCount).DefaultIfEmpty();
+    }
+    internal struct Month
+    {
+        public int DaysCount { get; }
+        public MonthName Name { get; }
+
+        public Month(MonthName name, int daysCount)
+        {
+            DaysCount = daysCount;
+            Name = name;
+        }
+
+        public override string ToString() => $"{Name.ToString()}({DaysCount.ToString()})";
+    }
+    internal enum MonthName
+    {
+        Январь = 1,
+        Февраль,
+        Март,
+        Апрель,
+        Май,
+        Июнь,
+        Июль,
+        Август,
+        Сентябрь,
+        Октябрь,
+        Ноябрь,
+        Декабрь
     }
 }

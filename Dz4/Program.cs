@@ -1,31 +1,32 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Dz4
 {
-    class Program
+    internal class Program
     {
-        static string consoleRowsDelimeterString = new string('-', Console.WindowWidth);
-        static IEnumerable<int> Squares(params int[] numbers)
+        private static readonly string ConsoleRowsDelimeterString = new string('-', Console.WindowWidth);
+
+        private static IEnumerable<int> Squares(params int[] numbers)
         {
-            foreach (var v in numbers.Where(p => p % 2 == 1))
-                yield return v * v;
+            foreach (int number in numbers.Where(p => p % 2 == 1))
+                yield return number * number;
         }
+
         public static void Task1()
         {
             var numbers = new[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            Console.WriteLine($"Задание 1\nКоллекция: {numbers.GetString()}\nПосле метода Squares: {Squares(numbers).GetString()}\n{consoleRowsDelimeterString}\n");
+            Console.WriteLine($"Задание 1\nКоллекция: {numbers.GetString()}\nПосле метода Squares: {Squares(numbers).GetString()}\n{ConsoleRowsDelimeterString}\n");
         }
         public static void Task2()
         {
-            var monthes = new Monthes();
-            Console.WriteLine($"Задание 2\nТретий месяц: {monthes[3].ToString()}\nМесяцы в которых 30 дней: {monthes.GetMonthesByDaysCount(30).GetString()}\n{consoleRowsDelimeterString}\n");
+            Monthes monthes = new Monthes();
+            Console.WriteLine($"Задание 2\nТретий месяц: {monthes[3].ToString()}\nМесяцы в которых 30 дней: {monthes.GetMonthesByDaysCount(30).GetString()}\n{ConsoleRowsDelimeterString}\n");
         }
         public static void Task3()
         {
-            var purchases = new Purchases
+            Purchases purchases = new Purchases
             {
                 { "Вася Пупкин", "машина" },
                 { "Вася Пупкин", "квартира" },
@@ -39,7 +40,7 @@ namespace Dz4
                 { "Иван Иванович", "машина" },
                 { "Семён Семёныч", "пылесос" }
             };
-            Console.WriteLine($"Задание 3\nВсе приобретения:\n{purchases.GetString("\n")}\n\nВсё, что купил Иван Иванович:\n{purchases.GetCategoresByPurchaser("Иван Иванович").GetString(", ")}\n\nВсе, кто купили пылесос:\n{purchases.GetPurchasersByCategory("пылесос").GetString(", ")}\n{consoleRowsDelimeterString}\n");
+            Console.WriteLine($"Задание 3\nВсе приобретения:\n{purchases.GetString("\n")}\n\nВсё, что купил Иван Иванович:\n{purchases.GetCategoresByPurchaser("Иван Иванович").GetString(", ")}\n\nВсе, кто купили пылесос:\n{purchases.GetPurchasersByCategory("пылесос").GetString(", ")}\n{ConsoleRowsDelimeterString}\n");
         }
         public static void Task4()
         {
@@ -66,46 +67,47 @@ namespace Dz4
             Console.WriteLine("Remove(\"Add\");\n" + linkedList.GetString(", ", "\"", "\"") + "\n");
 
             linkedList.RemoveAt(1);
-            Console.WriteLine("RemoveAt(1);\n" + linkedList.GetString(", ", "\"", "\"") + $"\n{consoleRowsDelimeterString}\n");
+            Console.WriteLine("RemoveAt(1);\n" + linkedList.GetString(", ", "\"", "\"") + $"\n{ConsoleRowsDelimeterString}\n");
         }
         public static void Task5()
         {
-            var dic = new ArrayList()
+            Auto[] dic =
             {
                 new Auto("Toyota Corolla", 180, 300000, 5, 1),
                 new Auto("VAZ 2114i", 160, 220000, 0, 2),
                 new Auto("Daewoo Nexia", 140, 260000, 5, 3),
                 new Auto("Honda Torneo", 220, 400000, 7, 4),
                 new Auto("Audi R8 Best", 360, 4200000, 3, 5)
-            }.Cast<Auto>().ToArray();
+            };
 
             Console.WriteLine("Задание 5\nИсходный каталог автомобилей: \n" + dic.GetString("\n") + "\n");
             Array.Sort(dic);
-            Console.WriteLine("Отсортированный каталог автомобилей: \n" + dic.GetString("\n") + $"\n{consoleRowsDelimeterString}\n");
+            Console.WriteLine("Отсортированный каталог автомобилей: \n" + dic.GetString("\n") + $"\n{ConsoleRowsDelimeterString}\n");
         }
         public static void Task6()
         {
-            var collect = new List<Person>
+            Person[] collect =
             {
                 new Person { FirstName = "Damon", LastName = "Hill" },
                 new Person { FirstName = "Niki", LastName = "Lauda" },
                 new Person { FirstName = "Ayrton", LastName = "Senna" },
                 new Person { FirstName = "Graham", LastName = "Hill" },
                 new Person { FirstName = "Damon", LastName = "Crauch" }
-            }.ToArray();
+            };
 
             Console.WriteLine("Задание 6\nИсходный список: \n" + collect.GetString("\n") + "\n");
             Array.Sort(collect, (x, y) => (x.LastName + " " + x.FirstName).CompareTo(y.LastName + " " + y.FirstName));
-            Console.WriteLine("Отсортированный список: \n" + collect.GetString("\n") + $"\n{consoleRowsDelimeterString}\n");
+            Console.WriteLine("Отсортированный список: \n" + collect.GetString("\n") + $"\n{ConsoleRowsDelimeterString}\n");
         }
-        static void Main(string[] args)
+
+        private static void Main()
         {
-            List<object> o = new List<object> { 1, "asd", 5.5 };
-            List<string> s = new List<string> { "qwe", "dsa", "ewq" };
-            (o as List<string>).Add("");    //контравариантность List<in T>
-            (o as List<string>).First();    //нельзя
-            (s as List<object>).Add(5);     //нельзя
-            (s as List<object>).First();    //ковариантность List<out T>
+            //List<object> o = new List<object> { 1, "asd", 5.5 };
+            //List<string> s = new List<string> { "qwe", "dsa", "ewq" };
+            //(o as List<string>).Add("");    //контравариантность List<in T>
+            //(o as List<string>).First();    //нельзя
+            //(s as List<object>).Add(5);     //нельзя
+            //(s as List<object>).First();    //ковариантность List<out T>
 
             Task1();
             Task2();
