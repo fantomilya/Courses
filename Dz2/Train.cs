@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Dz2
 {
-    struct Train
+    internal struct Train
     {
         private readonly string _stationName;
         private readonly int _number;
@@ -18,7 +18,7 @@ namespace Dz2
         public override string ToString() => $"Поезд №{_number.ToString()} отправляется со станции {_stationName} в {_depatureTime}";
     }
 
-    class SortedTrains : SortedList<int, Train>
+    internal class SortedTrains : SortedList<int, Train>
     {
         public void InsertTrains()
         {

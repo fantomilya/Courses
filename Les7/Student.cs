@@ -1,6 +1,6 @@
 ﻿namespace Les7
 {
-    class Student
+    internal class Student
     {
         public static string UniversityName { get; set; }
         public string Name { get; set; }

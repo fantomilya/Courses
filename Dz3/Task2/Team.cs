@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Dz3
 {
-    class Team
+    internal class Team
     {
-        List<IWorker> workers;
+        private List<IWorker> workers;
 
         public void Build(House house)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Les7
 {
-    class Point
+    internal class Point
     {
         public double X { get; }
         public double Y { get; }

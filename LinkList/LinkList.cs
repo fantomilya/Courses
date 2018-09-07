@@ -1,10 +1,10 @@
-﻿using Extensions;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Extensions;
 
-namespace LinkedList
+namespace LinkList
 {
     public class LinkList<T> : ICollection<T>, IEnumerable<T>, IEnumerable, ICollection, IReadOnlyCollection<T>
         where T : IEquatable<T>
@@ -30,7 +30,7 @@ namespace LinkedList
             if (newNode.List != null || (node?.List ?? this) != this)
                 return;
 
-            if (First == null && Last == null)
+            if (First == null || Last == null)
                 First = Last = newNode;
             else if (node == null)
             {
@@ -40,7 +40,7 @@ namespace LinkedList
             }
             else
             {
-                if (node?.Next is LinkListNode<T> nextNode)
+                if (node.Next is LinkListNode<T> nextNode)
                 {
                     nextNode.Previous = newNode;
                     newNode.Next = nextNode;
@@ -86,7 +86,8 @@ namespace LinkedList
             Last = First = null;
             Count = 0;
         }
-        void ClearNode(LinkListNode<T> node)
+
+        private void ClearNode(LinkListNode<T> node)
         {
             node.Previous = node.Next = null;
             node.List = null;
@@ -152,7 +153,7 @@ namespace LinkedList
             return currentNode;
         }
 
-        IEnumerable<LinkListNode<T>> ToEnumerable()
+        private IEnumerable<LinkListNode<T>> ToEnumerable()
         {
             var currentNode = First;
             while (currentNode != null)

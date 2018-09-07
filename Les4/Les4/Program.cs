@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Les4
 {
-    class Program
+    internal class Program
     {
         public static void Resize<T>(ref T[] sourceArray, int newSize)
         {
@@ -122,7 +122,8 @@ namespace Les4
                 }
             }
         }
-        static void Main()
+
+        private static void Main()
         {
             Zadanie1();
             var subArray = SubArray(new[] { 1, 2, 3, 4 }, 1, 4);
@@ -177,7 +178,8 @@ namespace Les4
 
             return res;
         }
-        static int Fact(int k) => k > 1 ? k * Fact(k - 1) : 1;
+
+        private static int Fact(int k) => k > 1 ? k * Fact(k - 1) : 1;
         public static int[] MyReverse(int[] array)
         {
             int[] res = new int[array.Length];
@@ -189,7 +191,8 @@ namespace Les4
 
             return res;
         }
-        static void ConsoleClear(int rowsCount, int? leftFrom = null, int? topFrom = null)
+
+        private static void ConsoleClear(int rowsCount, int? leftFrom = null, int? topFrom = null)
         {
             var leftSaved = Console.CursorLeft;
             var topSaved = Console.CursorTop;

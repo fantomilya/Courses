@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Les10
 {
-    class Store: MyList<Article>
+    internal class Store: MyList<Article>
     {
         public Store():this(5)
         {
@@ -24,7 +24,8 @@ namespace Les10
             get => this.Where(p => p.Name.ToLower() == index.ToLower()).GetString(defaultIfEmpty: "Ничего нет");
         }
     }
-    class Article :IComparable<Article >
+
+    internal class Article :IComparable<Article >
     {
         public string Name { get; set; }
         public string Market { get; set; }

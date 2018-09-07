@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Les7
 {
-    class Figure
+    internal class Figure
     {
         private Point[] _points;
         private void FillPoints(params Point[] points) => _points = points;

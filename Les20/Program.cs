@@ -23,9 +23,9 @@ namespace Les20
         }
     }
 
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             var duplicates = new Hashtable();
 

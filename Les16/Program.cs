@@ -3,9 +3,9 @@ using System.Diagnostics;
 
 namespace Structure
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();

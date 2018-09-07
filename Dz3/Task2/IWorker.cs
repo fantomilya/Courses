@@ -1,6 +1,6 @@
 ﻿namespace Dz3
 {
-    interface IWorker
+    internal interface IWorker
     {
         void Work(House house);
     }

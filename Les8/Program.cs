@@ -2,9 +2,9 @@
 
 namespace Les8
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Stack stk1 = new Stack(10);
             Stack stk2 = new Stack(10);
@@ -58,11 +58,11 @@ namespace Les8
         }
     }
 
-    class Stack
+    internal class Stack
     {
         // Эти члены закрытые.
-        char[] _stack; // Массив для хранения данных стека.
-        int _count; // Индекс вершины стека.
+        private char[] _stack; // Массив для хранения данных стека.
+        private int _count; // Индекс вершины стека.
         
         // Создаем пустой класс Stack заданного размера,
         public Stack(int size)

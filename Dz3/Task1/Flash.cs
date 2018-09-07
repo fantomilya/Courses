@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace Dz3
 {
-    class Flash : Storage
+    internal class Flash : Storage
     {
-        const double speed = 655360;
-        double capacity;
-        List<File> files = new List<File>();
+        private const double speed = 655360;
+        private double capacity;
+        private List<File> files = new List<File>();
         public Flash(double capacity, string name, string model):base(name, model) => this.capacity = capacity;
 
         public override double CalcTime(double size) => size * 1024 * 1024 / speed;

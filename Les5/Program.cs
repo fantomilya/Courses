@@ -2,9 +2,9 @@
 
 namespace Les5
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             string str1 = "Я ";
             string str2 = "учу ";

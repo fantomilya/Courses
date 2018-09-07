@@ -11,8 +11,8 @@ namespace Dz5
 
     public class InsensitiveComparer : IEqualityComparer<Fish>
     {
-        static readonly CaseInsensitiveComparer comparer = new CaseInsensitiveComparer();
+        private static readonly CaseInsensitiveComparer Comparer = new CaseInsensitiveComparer();
         public int GetHashCode(Fish str) => str.Name.ToLower().GetHashCode();
-        public bool Equals(Fish fish1, Fish fish2) => fish2 != null && (ReferenceEquals(fish1, fish2) || comparer.Compare(fish1.Name, fish2.Name) == 0);
+        public bool Equals(Fish fish1, Fish fish2) => fish1 != null && fish2 != null && (ReferenceEquals(fish1, fish2) || Comparer.Compare(fish1.Name, fish2.Name) == 0);
     }
 }

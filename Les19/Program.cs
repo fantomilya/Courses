@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 
-class Program
+internal class Program
 {
-    class UserCollection
+    private class UserCollection
     {
         public static IEnumerable Power()
         {
@@ -14,7 +14,7 @@ class Program
         }
     }
 
-    static void Main()
+    private static void Main()
     {
         foreach (string element in UserCollection.Power())
             Console.WriteLine(element);

@@ -34,7 +34,7 @@
   <ItemGroup>
     <Reference Include="LinkList, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\LinkList\bin\Debug\LinkList.dll</HintPath>
+      <HintPath>..\LinkList\obj\Debug\LinkList.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

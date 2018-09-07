@@ -3,7 +3,7 @@ using System;
 
 namespace Les9
 {
-    class DateD
+    internal class DateD
     {
         public int Year { get; set; }
         public int Month { get; set; }

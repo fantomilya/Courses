@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Les1
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             #region task1 ver1
 #if !DEBUG
@@ -162,14 +162,14 @@ namespace Les1
             }
         }
 
-        static void Sum(long first, long second) => Console.WriteLine($"{first} + {second} = {first + second}");
-        static void Sub(long first, long second) => Console.WriteLine($"{first} - {second} = {first - second}");
-        static void Mult(long first, long second) => Console.WriteLine($"{first} * {second} = {first * second}");
-        static void Div(long first, long second) => Console.WriteLine(second == 0? "Попытка деления на ноль.": $"{first} / {second} = {first / second:#.##}");
+        private static void Sum(long first, long second) => Console.WriteLine($"{first} + {second} = {first + second}");
+        private static void Sub(long first, long second) => Console.WriteLine($"{first} - {second} = {first - second}");
+        private static void Mult(long first, long second) => Console.WriteLine($"{first} * {second} = {first * second}");
+        private static void Div(long first, long second) => Console.WriteLine(second == 0? "Попытка деления на ноль.": $"{first} / {second} = {first / second:#.##}");
 
-        static bool IsPositive(IComparable<long> l) => l.CompareTo(0) >= 0;
+        private static bool IsPositive(IComparable<long> l) => l.CompareTo(0) >= 0;
 
-        static bool IsPrime(long l)
+        private static bool IsPrime(long l)
         {
             for (long i = 2; i <=l / 2; i++)
                 if (l % i == 0)
@@ -184,10 +184,10 @@ namespace Les1
         /// <param name="number">Проверяемое число</param>
         /// <param name="dividers">делители (по умолчанию 2, 5, 3, 6, 9)</param>
         /// <returns></returns>
-        static bool IsDividesBy(long number, long[] dividers = null) =>
+        private static bool IsDividesBy(long number, long[] dividers = null) =>
             (dividers ?? new[] {2L, 5L, 3L, 6L, 9L}).All(p => number % p == 0);
 
-        static double ReadDouble(string preMessage = null, string postMessage = null)
+        private static double ReadDouble(string preMessage = null, string postMessage = null)
         {
             if (!string.IsNullOrEmpty(preMessage))
                 Console.Write(preMessage);
@@ -200,6 +200,6 @@ namespace Les1
             return val;
         }
 
-        static int ReadInt(string preMessage = null, string postMessage = null) => (int)ReadDouble(preMessage, postMessage);
+        private static int ReadInt(string preMessage = null, string postMessage = null) => (int)ReadDouble(preMessage, postMessage);
     }
 }

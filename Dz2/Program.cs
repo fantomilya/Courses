@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace Dz2
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
 
             //SortedTrains trains = new SortedTrains();
@@ -19,9 +19,10 @@ namespace Dz2
             workers.SearchWorker();
             Console.ReadKey();
         }
-        class SortedWorkers : List<Worker>
+
+        private class SortedWorkers : List<Worker>
         {
-            static Random rand = new Random();
+            private static Random rand = new Random();
             public void InputWorkersRand()
             {
                 for (int i = 1; i < 11; i++)
@@ -67,11 +68,12 @@ namespace Dz2
             }
             public override string ToString() => this.GetString("\n");
         }
-        struct Worker : IComparable<Worker>
+
+        private struct Worker : IComparable<Worker>
         {
-            string FIO;
-            string Position;
-            int Year;
+            private string FIO;
+            private string Position;
+            private int Year;
 
             public Worker(string fIO, string position, int year)
             {

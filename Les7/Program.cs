@@ -2,9 +2,9 @@
 
 namespace Les7
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Figure f = new Figure(new Point(1, 2), new Point(2, 3), new Point(3, 4));
             Bike[] bikes = { new Bike(ConsoleColor.Blue), new Bike(new Point(3, 5)), new Bike(250, 200, 70), new Bike(200, 190, 65, ConsoleColor.Gray, 1300, 1000, 8, new Point(0, 0)), new Bike() };
@@ -15,7 +15,7 @@ namespace Les7
         }
     }
 
-    partial class Bike
+    internal partial class Bike
     {
         public Point Move(double x, double y, out double time, out double fuelTankPercent)
         {

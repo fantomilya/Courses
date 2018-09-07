@@ -1,6 +1,6 @@
 ﻿namespace Dz3
 {
-    enum Type
+    internal enum Type
     {
         OneSided,
         DoubleSided

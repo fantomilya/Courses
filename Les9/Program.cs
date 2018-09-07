@@ -2,7 +2,7 @@
 
 namespace Les9
 {
-    class Program
+    internal class Program
     {
         public static void WorldOfTanks(int n = 5)
         {
@@ -34,7 +34,8 @@ namespace Les9
             Console.ResetColor();
             Console.ReadKey(true);
         }
-        static void Main()
+
+        private static void Main()
         {
             WorldOfTanks(10);
             Random r = new Random();
