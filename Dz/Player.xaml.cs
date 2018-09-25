@@ -1,12 +1,13 @@
-﻿using Microsoft.Win32;
-using NAudio.Wave;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
+using Microsoft.Win32;
+using NAudio.Wave;
 
 namespace Dz
 {
@@ -134,7 +135,7 @@ namespace Dz
 
             if (_recordedData.Any())
             {
-                string path = System.IO.Path.GetTempFileName().Replace(".tmp", ".mp3");
+                string path = Path.GetTempFileName().Replace(".tmp", ".mp3");
                 using (WaveFileWriter writer = new WaveFileWriter(path, _recorder.WaveFormat))
                 {
                     writer.Write(_recordedData.ToArray(), 0, _recordedData.Count);

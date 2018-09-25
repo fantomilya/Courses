@@ -32,7 +32,7 @@ namespace Dz3
 
         public override double GetFreeMemory() => sections.Max(p => p.Capacity - p.files.Sum(f => f.size));
 
-        public override string GetInfo() => $"HDD {base.ToString()} скорость {speed.ToString()} КБ/c, кол-во секций {sections.Count.ToString()}, размер секции {sections.FirstOrDefault().Capacity.ToString()} ГБ";
+        public override string GetInfo() => $"HDD {ToString()} скорость {speed.ToString()} КБ/c, кол-во секций {sections.Count.ToString()}, размер секции {sections.FirstOrDefault().Capacity.ToString()} ГБ";
 
         public override void Clear()
         {

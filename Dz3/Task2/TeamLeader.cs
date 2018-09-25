@@ -1,6 +1,6 @@
-﻿using Extensions;
-using System;
+﻿using System;
 using System.Linq;
+using Extensions;
 
 namespace Dz3
 {

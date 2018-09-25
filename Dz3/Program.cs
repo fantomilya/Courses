@@ -14,7 +14,7 @@ namespace Dz3
             foreach (var storage in storages)
             {
                 int count = 1;
-                Console.WriteLine($"{storage.GetInfo()}\nВремя, необходимое для копирования = " + storage.CalcTime(files.Sum(p=>p.size)).ToString() + "с.");
+                Console.WriteLine($"{storage.GetInfo()}\nВремя, необходимое для копирования = " + storage.CalcTime(files.Sum(p=>p.size)) + "с.");
                 foreach (var file in files)
                 {
                     if (storage.GetFreeMemory() < file.size)

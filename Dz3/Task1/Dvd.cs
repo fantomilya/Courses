@@ -39,6 +39,6 @@ namespace Dz3
 
         public override double GetFreeMemory() => (type == Type.OneSided ? 4.7 : 9) - files.Sum(p => p.size);
 
-        public override string GetInfo() => $"DVD {base.ToString()} скорость {speed.ToString()} КБ/c, тип {type.ToString()}, свободное место {GetFreeMemory().ToString()} ГБ";
+        public override string GetInfo() => $"DVD {ToString()} скорость {speed.ToString()} КБ/c, тип {type.ToString()}, свободное место {GetFreeMemory().ToString()} ГБ";
     }
 }

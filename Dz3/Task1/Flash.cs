@@ -34,6 +34,6 @@ namespace Dz3
 
         public override double GetFreeMemory() => capacity - files.Sum(p => p.size);
 
-        public override string GetInfo() => $"Flash {base.ToString()} скорость {speed.ToString()} КБ/c, объем {capacity.ToString()} ГБ, свободное место {GetFreeMemory().ToString()} ГБ";
+        public override string GetInfo() => $"Flash {ToString()} скорость {speed.ToString()} КБ/c, объем {capacity.ToString()} ГБ, свободное место {GetFreeMemory().ToString()} ГБ";
     }
 }

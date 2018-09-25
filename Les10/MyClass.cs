@@ -1,6 +1,6 @@
-﻿using Extensions;
-using System;
+﻿using System;
 using System.Linq;
+using Extensions;
 
 namespace Les10
 {
@@ -15,14 +15,9 @@ namespace Les10
             AddRange(new Article("Велик", "Велостор", 100), new Article("Айфон", "ЭплСтор", 100), new Article("Лопата", "хз", 5));
         }
 
-        public new string this[int index]
-        {
-            get => (this as MyList<Article>)[index].ToString();
-        }
-        public string this[string index]
-        {
-            get => this.Where(p => p.Name.ToLower() == index.ToLower()).GetString(defaultIfEmpty: "Ничего нет");
-        }
+        public new string this[int index] => (this as MyList<Article>)[index].ToString();
+
+        public string this[string index] => this.Where(p => p.Name.ToLower() == index.ToLower()).GetString(defaultIfEmpty: "Ничего нет");
     }
 
     internal class Article :IComparable<Article >
