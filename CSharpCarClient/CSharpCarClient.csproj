@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D1CAB1DD-F410-443C-9481-5AB7FB1BA05D}</ProjectGuid>
+    <ProjectGuid>{52E9D428-B78F-452C-B2D2-382306029CE9}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Kr</RootNamespace>
-    <AssemblyName>Kr</AssemblyName>
+    <RootNamespace>CSharpCarClient</RootNamespace>
+    <AssemblyName>CSharpCarClient</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CarLibrary">
+      <HintPath>..\..\sol\ConsoleApp1\bin\Debug\CarLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,22 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formula1.cs" />
-    <Compile Include="MyClass.cs" />
-    <Compile Include="MyObservableCollection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Racer.cs" />
-    <Compile Include="Team.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Extensions\Extensions.csproj">
-      <Project>{bba7419a-1e68-45af-a7ea-3e0144cbb060}</Project>
-      <Name>Extensions</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
