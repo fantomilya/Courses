@@ -15,26 +15,20 @@ namespace Kr
 
                 var delegates = HiddenEvent?.GetInvocationList();
 
-                if (delegates?.Contains(value) == true)
+                if (delegates?.Select(p=>p.Target).Contains(value.Target) == true)
                 {
                     Console.WriteLine("Объект, предоставляющий обработчик для события уже подписан");
                     return;
                 }
-                var inv = value.GetInvocationList();
-                if (value.Target != null && value.Method != null && delegates?.Any(p => p.GetInvocationList().Any(m => inv.Contains(m))) == true)
+                if (delegates?.Select(p => p.Method).Contains(value.Method) == true)
                 {
                     Console.WriteLine("Конкретный метод-обработчик конкретного объекта уже подписан");
                     return;
                 }
-                else
-                {
-                    HiddenEvent += value;
-                }
+
+                HiddenEvent += value;
             }
-            remove
-            {
-                HiddenEvent -= value;
-            }
+            remove => HiddenEvent -= value;
         }
         private void Invoke()
         {

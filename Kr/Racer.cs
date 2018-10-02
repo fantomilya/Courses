@@ -13,13 +13,13 @@ namespace Kr
         public Racer(string firstName, string lastName, string country,
         int starts, int wins, IEnumerable<int> years, IEnumerable<string> cars)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Country = country;
-            this.Starts = starts;
-            this.Wins = wins;
-            this.Years = new List<int>(years);
-            this.Cars = new List<string>(cars);
+            FirstName = firstName;
+            LastName = lastName;
+            Country = country;
+            Starts = starts;
+            Wins = wins;
+            Years = new List<int>(years);
+            Cars = new List<string>(cars);
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -28,15 +28,12 @@ namespace Kr
         public int Starts { get; set; }
         public IEnumerable<string> Cars { get; private set; }
         public IEnumerable<int> Years { get; private set; }
-        public override string ToString()
-        {
-            return String.Format("{0} {1}, {2}; starts: {3}, wins: {4}",
-            FirstName, LastName, Country, Starts, Wins);
-        }
+        public override string ToString() => $"{FirstName} {LastName}, {Country}; starts: {Starts}, wins: {Wins}";
+
         public int CompareTo(Racer other)
         {
             if (other == null) return -1;
-            return string.Compare(this.LastName, other.LastName);
+            return string.Compare(LastName, other.LastName);
         }
     }
 }

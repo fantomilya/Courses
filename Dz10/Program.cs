@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
 using System.Collections;
 
@@ -15,11 +13,11 @@ namespace Dz10
     }
     class Program
     {
-        public static List<object> types = new List<object>() { @"TCP\IP" };
+        public static List<object> types = new List<object> { @"Первый полет человека в космос" };//TCP\IP" };
         static void Task()
         {
-            var a1 = Assembly.LoadFile(@"D:\FortBoyard\ClassLibrary1.dll");
-            var a2 = Assembly.LoadFile(@"D:\FortBoyard\ClassLibrary2.dll");
+            var a1 = Assembly.LoadFile(@"C:\FortBoyard\ClassLibrary1.dll");
+            var a2 = Assembly.LoadFile(@"C:\FortBoyard\ClassLibrary2.dll");
             CheckOutAssembly(a1);
             Console.WriteLine();
             CheckOutAssembly(a2);
@@ -56,18 +54,18 @@ namespace Dz10
             var val = pi.GetValue(obj);
             if (val is string s)
                 return s;
-            else if (val is null)
+            if (val is null)
                 return "null";
-            else if (val is IEnumerable e)
+            if (val is IEnumerable e)
             {
                 string res = "";
                 foreach (var v in e)
-                    res += ", " + v.ToString();
+                    res += ", " + v;
 
                 return res.TrimStart(',', ' ');
             }
-            else
-                return val.ToString();
+
+            return val.ToString();
         }
         static string GetValue(FieldInfo fi, object obj)
         {
@@ -95,7 +93,7 @@ namespace Dz10
                 var instance = CreateInstance(t);
                 foreach (var v in t.GetMembers(BindingFlags.CreateInstance | BindingFlags.GetField | BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly))
                 {
-                    Console.WriteLine("\t" + v.ToString());
+                    Console.WriteLine("\t" + v);
                     if (v is PropertyInfo pi)
                         Console.WriteLine("\t\t" + GetValue(pi, instance));
                     if (v is FieldInfo fi)
@@ -105,7 +103,7 @@ namespace Dz10
                         try
                         {
                             var parameters = mi.GetParameters();
-                            if (parameters.Count() == 0)
+                            if (!parameters.Any())
                                 mi.Invoke(instance, null);
                             else
                                 Console.WriteLine("\t\t" + mi.Invoke(instance, mi.GetParameters().Select(p => CreateInstance(p.ParameterType.GetTypeInfo())).ToArray())?.ToString() ?? "null");
@@ -116,7 +114,6 @@ namespace Dz10
                         }
                     }
                 }
-
                 Console.WriteLine("\n" + new string('-', Console.WindowWidth));
             }
         }
@@ -127,15 +124,23 @@ namespace Dz10
         {
             value = ignoreCase ? value.ToLower() : value;
             foreach (var v in Enum.GetValues(typeof(e)))
-                if (Enum.GetName(enumType, v) is var name && (ignoreCase? name.ToLower():name) == value)
+            {
+                var enumName = Enum.GetName(enumType, v);
+                if ((ignoreCase? enumName.ToLower(): enumName) == value ||
+                    int.TryParse(value, out var val) && (int)v == val)
                     return v;
+            }
 
-            throw new ArgumentException($"Запрошенное значение не найдено.");
+            throw new ArgumentException("Запрошенное значение не найдено.");
         }
-        static void Main(string[] args)
+        static void Main()
         {
-            Task();
-            var assembly1 = Assembly.LoadFile(@"D:\FortBoyard\ClassLibrary1.dll");
+            var asd = Parse(typeof(e), "12", true);
+            var assembly1 = Assembly.LoadFile(@"C:\FortBoyard\ClassLibrary1.dll");
+
+            var SecondClass = assembly1.GetType(@"ClassLibrary1.SecondClass");
+            var SecondClassInstance = CreateInstance(SecondClass.GetTypeInfo());
+            Console.WriteLine(SecondClass.GetMethod("HelpForDecode").Invoke(SecondClassInstance, new[] { "Первый полет человека в космос" }));
 
             var generatorType = assembly1.GetType("ClassLibrary1.GeneratorOfKeys");
             var generatorInstance = CreateInstance(generatorType.GetTypeInfo());
@@ -149,7 +154,7 @@ namespace Dz10
             }
 
 
-            var assembly2 = Assembly.LoadFile(@"D:\FortBoyard\ClassLibrary2.dll");
+            var assembly2 = Assembly.LoadFile(@"C:\FortBoyard\ClassLibrary2.dll");
             var targetClassType = assembly2.GetType("ClassLibrary2.TargetClass");
             var targetClassInstance = CreateInstance(targetClassType.GetTypeInfo());
             targetClassType.GetMethod("Metod").Invoke(targetClassInstance, new[] { "Пуск" });
