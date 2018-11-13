@@ -1,9 +1,8 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace FileManager
 {
-    partial class Form1
+    partial class FileManagerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,8 +31,8 @@ namespace FileManager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tvLeft = new System.Windows.Forms.TreeView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tvFileBrowser = new System.Windows.Forms.TreeView();
+            this.cmsActions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,38 +40,37 @@ namespace FileManager
             this.tsmiRename = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiProperties = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.flpButtonsForCheckedNodes = new System.Windows.Forms.FlowLayoutPanel();
+            this.lbCheckedButtons = new System.Windows.Forms.Label();
             this.btDeleteChecked = new System.Windows.Forms.Button();
             this.btCopyChecked = new System.Windows.Forms.Button();
-            this.contextMenuStrip1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.cmsActions.SuspendLayout();
+            this.tableLayoutPanel.SuspendLayout();
+            this.flpButtonsForCheckedNodes.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tvLeft
+            // tvFileBrowser
             // 
-            this.tvLeft.CheckBoxes = true;
-            this.tvLeft.ContextMenuStrip = this.contextMenuStrip1;
-            this.tvLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvLeft.LabelEdit = true;
-            this.tvLeft.Location = new System.Drawing.Point(3, 3);
-            this.tvLeft.Name = "tvLeft";
-            this.tvLeft.Size = new System.Drawing.Size(794, 409);
-            this.tvLeft.TabIndex = 0;
-            this.tvLeft.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.tvLeft_BeforeLabelEdit);
-            this.tvLeft.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.tvLeft_AfterLabelEdit);
-            this.tvLeft.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
-            this.tvLeft.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
-            this.tvLeft.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.tvLeft.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
-            this.tvLeft.DoubleClick += new System.EventHandler(this.tvLeft_DoubleClick);
-            this.tvLeft.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tvLeft_KeyUp);
+            this.tvFileBrowser.CheckBoxes = true;
+            this.tvFileBrowser.ContextMenuStrip = this.cmsActions;
+            this.tvFileBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvFileBrowser.LabelEdit = true;
+            this.tvFileBrowser.Location = new System.Drawing.Point(3, 3);
+            this.tvFileBrowser.Name = "tvFileBrowser";
+            this.tvFileBrowser.Size = new System.Drawing.Size(794, 444);
+            this.tvFileBrowser.TabIndex = 0;
+            this.tvFileBrowser.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.tvFileBrowser_BeforeLabelEdit);
+            this.tvFileBrowser.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.tvFileBrowser_AfterLabelEdit);
+            this.tvFileBrowser.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvFileBrowser_AfterCheck);
+            this.tvFileBrowser.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvFileBrowser_BeforeExpand);
+            this.tvFileBrowser.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvFileBrowser_AfterSelect);
+            this.tvFileBrowser.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvFileBrowser_NodeMouseClick);
+            this.tvFileBrowser.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tvFileBrowser_KeyUp);
             // 
-            // contextMenuStrip1
+            // cmsActions
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCopy,
             this.tsmiPaste,
             this.tsmiDelete,
@@ -80,8 +78,8 @@ namespace FileManager
             this.tsmiRename,
             this.tsmiRefresh,
             this.tsmiProperties});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(162, 158);
+            this.cmsActions.Name = "contextMenuStrip1";
+            this.cmsActions.Size = new System.Drawing.Size(162, 158);
             // 
             // tsmiCopy
             // 
@@ -133,40 +131,40 @@ namespace FileManager
             this.tsmiProperties.Text = "Свойства";
             this.tsmiProperties.Click += new System.EventHandler(this.tsmiProperties_Click);
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanel
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tvLeft, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 0F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
-            this.tableLayoutPanel1.TabIndex = 2;
+            this.tableLayoutPanel.ColumnCount = 1;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.Controls.Add(this.tvFileBrowser, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.flpButtonsForCheckedNodes, 0, 1);
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 2;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 0F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(800, 450);
+            this.tableLayoutPanel.TabIndex = 2;
             // 
-            // flowLayoutPanel1
+            // flpButtonsForCheckedNodes
             // 
-            this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Controls.Add(this.btDeleteChecked);
-            this.flowLayoutPanel1.Controls.Add(this.btCopyChecked);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 418);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(794, 29);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.flpButtonsForCheckedNodes.Controls.Add(this.lbCheckedButtons);
+            this.flpButtonsForCheckedNodes.Controls.Add(this.btDeleteChecked);
+            this.flpButtonsForCheckedNodes.Controls.Add(this.btCopyChecked);
+            this.flpButtonsForCheckedNodes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flpButtonsForCheckedNodes.Location = new System.Drawing.Point(3, 453);
+            this.flpButtonsForCheckedNodes.Name = "flpButtonsForCheckedNodes";
+            this.flpButtonsForCheckedNodes.Size = new System.Drawing.Size(794, 1);
+            this.flpButtonsForCheckedNodes.TabIndex = 1;
             // 
-            // label1
+            // lbCheckedButtons
             // 
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 23);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Операции с отмеченными";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbCheckedButtons.Location = new System.Drawing.Point(3, 0);
+            this.lbCheckedButtons.Name = "lbCheckedButtons";
+            this.lbCheckedButtons.Size = new System.Drawing.Size(139, 23);
+            this.lbCheckedButtons.TabIndex = 3;
+            this.lbCheckedButtons.Text = "Операции с отмеченными";
+            this.lbCheckedButtons.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btDeleteChecked
             // 
@@ -188,27 +186,27 @@ namespace FileManager
             this.btCopyChecked.UseVisualStyleBackColor = true;
             this.btCopyChecked.Click += new System.EventHandler(this.btCopyChecked_Click);
             // 
-            // Form1
+            // FileManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.contextMenuStrip1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.Controls.Add(this.tableLayoutPanel);
+            this.Name = "FileManagerForm";
+            this.Text = "FileManagerForm";
+            this.Load += new System.EventHandler(this.FileManagerForm_Load);
+            this.cmsActions.ResumeLayout(false);
+            this.tableLayoutPanel.ResumeLayout(false);
+            this.flpButtonsForCheckedNodes.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TreeView tvLeft;
-        private TableLayoutPanel tableLayoutPanel1;
-        private ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.TreeView tvFileBrowser;
+        private TableLayoutPanel tableLayoutPanel;
+        private ContextMenuStrip cmsActions;
         private ToolStripMenuItem tsmiCopy;
         private ToolStripMenuItem tsmiPaste;
         private ToolStripMenuItem tsmiDelete;
@@ -216,8 +214,8 @@ namespace FileManager
         private ToolStripMenuItem tsmiRename;
         private ToolStripMenuItem tsmiProperties;
         private ToolStripMenuItem tsmiRefresh;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Label label1;
+        private FlowLayoutPanel flpButtonsForCheckedNodes;
+        private Label lbCheckedButtons;
         private Button btDeleteChecked;
         private Button btCopyChecked;
     }
