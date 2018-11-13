@@ -63,9 +63,9 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Document_Blank_icon {
+        internal static System.Drawing.Bitmap file {
             get {
-                object obj = ResourceManager.GetObject("Document_Blank_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("file", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap File_Checked_icon {
+        internal static System.Drawing.Bitmap folder {
             get {
-                object obj = ResourceManager.GetObject("File_Checked_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("folder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,19 +83,9 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Folder_Checked_icon {
+        internal static System.Drawing.Bitmap folder_declined {
             get {
-                object obj = ResourceManager.GetObject("Folder_Checked_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Folder_Generic_Green_icon {
-            get {
-                object obj = ResourceManager.GetObject("Folder_Generic_Green_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("folder_declined", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ArrayExtesions.cs" />
     <Compile Include="ControlExtensions.cs" />
+    <Compile Include="DirectoryExtensions.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="ExpressionExtensions.cs" />
     <Compile Include="OtherExtensions.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="RandomExtensions.cs" />
     <Compile Include="StringBuilderExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="TreeViewExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
